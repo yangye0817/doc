@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 提效在前端研发全流程中的探索</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: rgba(15, 23, 42, .74);
+      --panel-strong: rgba(15, 23, 42, .92);
+      --line: rgba(148, 163, 184, .22);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --soft: #cbd5e1;
+      --blue: #38bdf8;
+      --green: #22c55e;
+      --violet: #8b5cf6;
+      --orange: #f97316;
+      --rose: #fb7185;
+      --amber: #fbbf24;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .38);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Fira Sans", "Inter", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(34, 197, 94, .18), transparent 30rem),
+        radial-gradient(circle at 82% 14%, rgba(56, 189, 248, .18), transparent 28rem),
+        linear-gradient(180deg, #020617 0%, #07111f 46%, #030712 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .42;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, .06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.035) 42%, transparent 50%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1180px, calc(100vw - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      width: min(1180px, calc(100vw - 24px));
+      margin: 12px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 12px 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(2, 6, 23, .72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .28);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand-mark,
+    .icon-box {
+      width: 32px;
+      height: 32px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(56,189,248,.88));
+      box-shadow: 0 0 24px rgba(34, 197, 94, .26);
+      flex: 0 0 auto;
+    }
+
+    .brand svg,
+    .icon-box svg { width: 18px; height: 18px; stroke: #02111d; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: var(--radius);
+      color: var(--soft);
+      font-size: 14px;
+      white-space: nowrap;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+      background: rgba(148, 163, 184, .12);
+      outline: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 74px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      padding: 4px 12px;
+      border: 1px solid rgba(34, 197, 94, .34);
+      border-radius: 999px;
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, .09);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 8px rgba(34, 197, 94, .13);
+    }
+
+    h1 {
+      margin: 22px 0 16px;
+      max-width: 820px;
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    h1 .grad {
+      color: transparent;
+      background: linear-gradient(90deg, #f8fafc 0%, #86efac 48%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(34, 197, 94, .14);
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: #dbeafe;
+      font-size: clamp(17px, 2vw, 22px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--text);
+      background: rgba(15, 23, 42, .66);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(56, 189, 248, .5);
+      background: rgba(30, 41, 59, .92);
+      outline: none;
+    }
+
+    .btn.primary {
+      color: #02111d;
+      border-color: rgba(34, 197, 94, .72);
+      background: linear-gradient(135deg, #86efac, #22d3ee);
+      font-weight: 800;
+    }
+
+    .btn svg { width: 18px; height: 18px; }
+
+    .signal-board {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(15, 23, 42, .78), rgba(2, 6, 23, .8));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .board-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--rose);
+    }
+
+    .dots span:nth-child(2) { background: var(--amber); }
+    .dots span:nth-child(3) { background: var(--green); }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .metric {
+      min-height: 138px;
+      padding: 18px;
+      background: rgba(2, 6, 23, .78);
+    }
+
+    .metric b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 28px;
+      line-height: 1;
+      font-family: "Fira Code", ui-monospace, monospace;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .metric:nth-child(1) b { color: #86efac; }
+    .metric:nth-child(2) b { color: #67e8f9; }
+    .metric:nth-child(3) b { color: #c4b5fd; }
+    .metric:nth-child(4) b { color: #fdba74; }
+
+    section {
+      padding: 76px 0;
+      scroll-margin-top: 86px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+
+    .kicker {
+      color: #86efac;
+      font-size: 14px;
+      font-family: "Fira Code", ui-monospace, monospace;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 8px 0 0;
+      max-width: 760px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .section-copy {
+      max-width: 430px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .strip {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15, 23, 42, .52);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, .16);
+    }
+
+    .phase-map {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .phase-group {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(2, 6, 23, .42);
+      overflow: hidden;
+    }
+
+    .phase-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 54px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, .18);
+      background: linear-gradient(90deg, rgba(56, 189, 248, .2), rgba(56, 189, 248, .05));
+    }
+
+    .phase-group.dev .phase-head {
+      background: linear-gradient(90deg, rgba(34, 197, 94, .2), rgba(34, 197, 94, .05));
+    }
+
+    .phase-group.ops .phase-head {
+      background: linear-gradient(90deg, rgba(139, 92, 246, .22), rgba(139, 92, 246, .05));
+    }
+
+    .phase-title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .phase-meta {
+      color: var(--muted);
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .phase-steps {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .phase-group.pre .phase-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .phase-group.dev .phase-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .phase-group.ops .phase-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+    .stage {
+      --stage-accent: var(--blue);
+      --stage-soft: rgba(56, 189, 248, .16);
+      --stage-border: rgba(56, 189, 248, .46);
+      min-height: 198px;
+      padding: 16px 14px 14px 18px;
+      border: 1px solid var(--stage-border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, var(--stage-soft), rgba(15,23,42,.72) 48%, rgba(2,6,23,.76)),
+        rgba(15,23,42,.86);
+      box-shadow:
+        inset 4px 0 0 var(--stage-accent),
+        0 12px 34px rgba(0, 0, 0, .2),
+        0 0 0 1px rgba(255, 255, 255, .025);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--stage-accent), transparent);
+      opacity: .9;
+    }
+
+    .phase-group.pre .stage:nth-child(1) {
+      --stage-accent: #38bdf8;
+      --stage-soft: rgba(56, 189, 248, .2);
+      --stage-border: rgba(56, 189, 248, .52);
+    }
+
+    .phase-group.pre .stage:nth-child(2) {
+      --stage-accent: #0ea5e9;
+      --stage-soft: rgba(14, 165, 233, .18);
+      --stage-border: rgba(14, 165, 233, .5);
+    }
+
+    .phase-group.dev .stage:nth-child(1) {
+      --stage-accent: #22c55e;
+      --stage-soft: rgba(34, 197, 94, .2);
+      --stage-border: rgba(34, 197, 94, .52);
+    }
+
+    .phase-group.dev .stage:nth-child(2) {
+      --stage-accent: #14b8a6;
+      --stage-soft: rgba(20, 184, 166, .2);
+      --stage-border: rgba(20, 184, 166, .52);
+    }
+
+    .phase-group.dev .stage:nth-child(3) {
+      --stage-accent: #84cc16;
+      --stage-soft: rgba(132, 204, 22, .18);
+      --stage-border: rgba(132, 204, 22, .48);
+    }
+
+    .phase-group.dev .stage:nth-child(4) {
+      --stage-accent: #fbbf24;
+      --stage-soft: rgba(251, 191, 36, .18);
+      --stage-border: rgba(251, 191, 36, .48);
+    }
+
+    .phase-group.dev .stage:nth-child(5) {
+      --stage-accent: #f97316;
+      --stage-soft: rgba(249, 115, 22, .18);
+      --stage-border: rgba(249, 115, 22, .5);
+    }
+
+    .phase-group.dev .stage:nth-child(6) {
+      --stage-accent: #fb7185;
+      --stage-soft: rgba(251, 113, 133, .18);
+      --stage-border: rgba(251, 113, 133, .5);
+    }
+
+    .phase-group.ops .stage:nth-child(1) {
+      --stage-accent: #8b5cf6;
+      --stage-soft: rgba(139, 92, 246, .22);
+      --stage-border: rgba(139, 92, 246, .52);
+    }
+
+    .phase-group.ops .stage:nth-child(2) {
+      --stage-accent: #6366f1;
+      --stage-soft: rgba(99, 102, 241, .2);
+      --stage-border: rgba(99, 102, 241, .5);
+    }
+
+    .phase-group.ops .stage:nth-child(3) {
+      --stage-accent: #a855f7;
+      --stage-soft: rgba(168, 85, 247, .2);
+      --stage-border: rgba(168, 85, 247, .5);
+    }
+
+    .phase-group.ops .stage:nth-child(4) {
+      --stage-accent: #ec4899;
+      --stage-soft: rgba(236, 72, 153, .18);
+      --stage-border: rgba(236, 72, 153, .5);
+    }
+
+    .phase-group.ops .stage:nth-child(5) {
+      --stage-accent: #f97316;
+      --stage-soft: rgba(249, 115, 22, .18);
+      --stage-border: rgba(249, 115, 22, .5);
+    }
+
+    .stage-num {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #020617;
+      background: var(--stage-accent);
+      box-shadow: 0 0 22px color-mix(in srgb, var(--stage-accent) 42%, transparent);
+      font-weight: 900;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-size: 14px;
+    }
+
+    .stage h3,
+    .card h3,
+    .flow-card h3 {
+      margin: 12px 0 8px;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .stage p,
+    .card p,
+    .flow-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .stage small {
+      display: inline-flex;
+      margin-top: 12px;
+      color: #dcfce7;
+      font-weight: 700;
+    }
+
+    .value-row {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .value {
+      min-height: 108px;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, .54);
+    }
+
+    .value b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .value span {
+      color: #86efac;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-weight: 800;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .16);
+    }
+
+    .card.accent-blue { border-color: rgba(56, 189, 248, .38); }
+    .card.accent-green { border-color: rgba(34, 197, 94, .38); }
+    .card.accent-violet { border-color: rgba(139, 92, 246, .38); }
+    .card.accent-orange { border-color: rgba(249, 115, 22, .38); }
+    .card.accent-rose { border-color: rgba(251, 113, 133, .38); }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--soft);
+      font-size: 15px;
+    }
+
+    .mini-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(34, 197, 94, .55);
+      flex: 0 0 auto;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 12px;
+      overflow-x: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, .58), rgba(2, 6, 23, .48)),
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, .1), transparent 32rem);
+    }
+
+    .flow-card {
+      --flow-accent: var(--blue);
+      --flow-accent-soft: rgba(56, 189, 248, .18);
+      --flow-accent-border: rgba(56, 189, 248, .48);
+      min-height: 170px;
+      padding: 18px 16px 16px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--flow-accent-border);
+      background:
+        linear-gradient(180deg, var(--flow-accent-soft), rgba(2, 6, 23, .76) 52%),
+        rgba(15, 23, 42, .86);
+      box-shadow:
+        inset 4px 0 0 var(--flow-accent),
+        0 14px 42px rgba(0, 0, 0, .22),
+        0 0 0 1px rgba(255, 255, 255, .03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flow-card::after {
+      content: "";
+      position: absolute;
+      top: 38px;
+      right: -13px;
+      width: 14px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--flow-accent), rgba(56, 189, 248, .18));
+      box-shadow: 0 0 14px var(--flow-accent);
+    }
+
+    .flow-card:last-child::after { display: none; }
+
+    .flow-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--flow-accent), transparent);
+      opacity: .9;
+    }
+
+    .flow-card:nth-child(2) {
+      --flow-accent: #22c55e;
+      --flow-accent-soft: rgba(34, 197, 94, .18);
+      --flow-accent-border: rgba(34, 197, 94, .5);
+    }
+
+    .flow-card:nth-child(3) {
+      --flow-accent: #8b5cf6;
+      --flow-accent-soft: rgba(139, 92, 246, .2);
+      --flow-accent-border: rgba(139, 92, 246, .52);
+    }
+
+    .flow-card:nth-child(4) {
+      --flow-accent: #f97316;
+      --flow-accent-soft: rgba(249, 115, 22, .2);
+      --flow-accent-border: rgba(249, 115, 22, .52);
+    }
+
+    .flow-card:nth-child(5) {
+      --flow-accent: #14b8a6;
+      --flow-accent-soft: rgba(20, 184, 166, .2);
+      --flow-accent-border: rgba(20, 184, 166, .52);
+    }
+
+    .flow-card:nth-child(6) {
+      --flow-accent: #fb7185;
+      --flow-accent-soft: rgba(251, 113, 133, .18);
+      --flow-accent-border: rgba(251, 113, 133, .5);
+    }
+
+    .flow-card:nth-child(7) {
+      --flow-accent: #fbbf24;
+      --flow-accent-soft: rgba(251, 191, 36, .17);
+      --flow-accent-border: rgba(251, 191, 36, .5);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      color: #020617;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: var(--flow-accent);
+      box-shadow: 0 0 22px color-mix(in srgb, var(--flow-accent) 42%, transparent);
+      font-size: 13px;
+      font-weight: 800;
+      font-family: "Fira Code", ui-monospace, monospace;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .problem {
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, .55);
+    }
+
+    .problem h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .solution-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .solution {
+      min-height: 92px;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--soft);
+      background: rgba(15, 23, 42, .68);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: linear-gradient(var(--green), var(--blue), var(--violet));
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .dot {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #020617;
+      border: 1px solid rgba(34, 197, 94, .55);
+      color: #86efac;
+      font-weight: 900;
+      font-family: "Fira Code", ui-monospace, monospace;
+      z-index: 1;
+    }
+
+    .timeline-body {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15, 23, 42, .62);
+    }
+
+    .timeline-body h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+
+    .timeline-body p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .check {
+      min-height: 110px;
+      padding: 15px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, .21);
+      background: rgba(2, 6, 23, .54);
+    }
+
+    .check b {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .check span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .loop-step {
+      min-height: 146px;
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(15,23,42,.72), rgba(2,6,23,.74)),
+        radial-gradient(circle at top, rgba(34,197,94,.12), transparent 70%);
+    }
+
+    .loop-step b {
+      display: block;
+      margin-bottom: 8px;
+      color: #bfdbfe;
+    }
+
+    .quote {
+      margin-top: 20px;
+      padding: 22px;
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius);
+      background: rgba(34, 197, 94, .08);
+      color: #dcfce7;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .source {
+      margin-top: 18px;
+      border: 1px solid rgba(148, 163, 184, .16);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(2, 6, 23, .5);
+    }
+
+    .source summary {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      color: var(--soft);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .source img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-top: 1px solid rgba(148, 163, 184, .16);
+    }
+
+    .footer {
+      padding: 46px 0 60px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-copy {
+        margin-top: 12px;
+        max-width: 760px;
+      }
+
+      .value-row,
+      .checklist,
+      .loop {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .phase-group.pre .phase-steps,
+      .phase-group.dev .phase-steps,
+      .phase-group.ops .phase-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .solution-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100vw - 24px, 1180px); }
+      .nav { align-items: stretch; flex-direction: column; }
+      .brand { padding-left: 2px; }
+      .hero { padding-top: 46px; }
+      .metrics,
+      .value-row,
+      .checklist,
+      .loop,
+      .phase-group.pre .phase-steps,
+      .phase-group.dev .phase-steps,
+      .phase-group.ops .phase-steps {
+        grid-template-columns: 1fr;
+      }
+      .phase-head { display: block; }
+      .phase-meta { display: block; margin-top: 4px; }
+      .solution-row { grid-template-columns: 1fr; }
+      section { padding: 54px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="报告导航">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M4 8h16"/><path d="M4 16h16"/><path d="m8 4 8 16"/><path d="m16 4-8 16"/></svg>
+      </span>
+      <span>AI Frontend Efficiency</span>
+    </a>
+    <div class="nav-links">
+      <a href="#overview">全景</a>
+      <a href="#before">开发前</a>
+      <a href="#d2c">设计稿还原</a>
+      <a href="#coding">代码生成</a>
+      <a href="#debug">联调自测</a>
+      <a href="#review">代码 Review</a>
+      <a href="#test">测试</a>
+      <a href="#ops">运维闭环</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero shell">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> AI 提效报告 · 前端研发全生命周期</div>
+          <h1>AI 提效在<span class="grad">前端研发全流程</span>中的探索</h1>
+          <p class="lead">从需求理解、方案设计、代码生成、联调自测、代码 Review 到发布后巡检，AI 的价值不只是“帮忙写代码”，而是把重复沟通、经验判断和上下文整理变成可沉淀、可反馈、可进化的工程能力。</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#overview">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+              查看全景地图
+            </a>
+            <a class="btn" href="#d2c">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/></svg>
+              进入核心方案
+            </a>
+          </div>
+        </div>
+        <aside class="signal-board" aria-label="关键收益指标">
+          <div class="board-top">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>impact.summary</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><b>50%</b><span>UI 还原部分开发效率提升</span></div>
+            <div class="metric"><b>30%-40%</b><span>整体效率与交付周期优化空间</span></div>
+            <div class="metric"><b>40%-50%</b><span>协同沟通时间降低的目标区间</span></div>
+            <div class="metric"><b>12</b><span>覆盖前端全流程的 AI 能力点</span></div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section id="overview" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">01 / Full Process</div>
+          <h2>一张图看清 AI 如何贯穿前端研发流程</h2>
+        </div>
+        <p class="section-copy">原 PDF 首图被转译为可横向浏览的 HTML 全景地图：开发前降低理解成本，开发中提升生成与协同效率，开发后沉淀经验并形成反馈闭环。</p>
+      </div>
+      <div class="strip">
+        <div class="phase-map" aria-label="按三阶段分类的 AI 提效全流程">
+          <div class="phase-group pre" aria-labelledby="phase-pre">
+            <div class="phase-head">
+              <h3 id="phase-pre" class="phase-title">1. 开发前：需求阶段</h3>
+              <span class="phase-meta">Steps 01-02 · 需求收敛 / 决策前置</span>
+            </div>
+            <div class="phase-steps">
+              <article class="stage"><div class="stage-num">1</div><h3>需求分析与澄清</h3><p>自动分析需求、提炼核心信息、识别风险并持续澄清。</p><small>价值：提升需求分析效率</small></article>
+              <article class="stage"><div class="stage-num">2</div><h3>自主判断可 AI 化</h3><p>判断任务是否可由 AI 自动完成，并生成执行方案。</p><small>价值：减少决策时间</small></article>
+            </div>
+          </div>
+
+          <div class="phase-group dev" aria-labelledby="phase-dev">
+            <div class="phase-head">
+              <h3 id="phase-dev" class="phase-title">2. 开发中：研发阶段</h3>
+              <span class="phase-meta">Steps 03-07 · 生成 / 联调自测 / CR / 测试</span>
+            </div>
+            <div class="phase-steps">
+              <article class="stage"><div class="stage-num">3</div><h3>设计稿还原</h3><p>解析设计稿，生成工程化、可复用的前端代码。</p><small>价值：提升设计到代码转换效率</small></article>
+              <article class="stage"><div class="stage-num">4</div><h3>代码生成</h3><p>基于需求与规范生成高质量、可维护代码。</p><small>价值：提升代码生成效率与质量</small></article>
+              <article class="stage"><div class="stage-num">5</div><h3>联调自测</h3><p>辅助日志分析、问题定位，并自动生成自测 Checklist 覆盖关键场景。</p><small>价值：提升定位效率与自测覆盖率</small></article>
+              <article class="stage"><div class="stage-num">6</div><h3>Code Review</h3><p>智能分析代码风险与影响，辅助 Review 决策。</p><small>价值：缺陷拦截率提升</small></article>
+              <article class="stage"><div class="stage-num">7</div><h3>测试</h3><p>自动生成测试用例并辅助执行，提高测试覆盖率。</p><small>价值：测试效率提升</small></article>
+            </div>
+          </div>
+
+          <div class="phase-group ops" aria-labelledby="phase-ops">
+            <div class="phase-head">
+              <h3 id="phase-ops" class="phase-title">3. 开发后：运维阶段</h3>
+              <span class="phase-meta">Steps 08-12 · 沉淀 / 巡检 / 分析 / 修复</span>
+            </div>
+            <div class="phase-steps">
+              <article class="stage"><div class="stage-num">8</div><h3>知识库沉淀</h3><p>沉淀文档与经验，构建团队知识资产。</p><small>价值：知识复用效率提升</small></article>
+              <article class="stage"><div class="stage-num">9</div><h3>自动巡检</h3><p>基于发布与风险分析，自动巡检关键页面。</p><small>价值：巡检效率提升</small></article>
+              <article class="stage"><div class="stage-num">10</div><h3>智能监控</h3><p>智能监控异常、关联分析并快速发现问题。</p><small>价值：异常发现效率提升</small></article>
+              <article class="stage"><div class="stage-num">11</div><h3>问题分析</h3><p>结合日志与链路分析，定位根因并提供修复建议。</p><small>价值：问题定位效率提升</small></article>
+              <article class="stage"><div class="stage-num">12</div><h3>自主修复</h3><p>自动执行修复方案，回滚或降低故障影响。</p><small>价值：故障修复效率提升</small></article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value"><b>效率提升</b><span>30%-40%</span></div>
+        <div class="value"><b>代码质量提升</b><span>20%-40%</span></div>
+        <div class="value"><b>协同沟通时间降低</b><span>40%-50%</span></div>
+        <div class="value"><b>上线风险降低</b><span>20%-40%</span></div>
+        <div class="value"><b>定位时间缩短</b><span>50%-70%</span></div>
+        <div class="value"><b>运维成本降低</b><span>30%-40%</span></div>
+      </div>
+      <details class="source">
+        <summary>查看原始 PDF 图片来源：全景图</summary>
+        <img src="assets/page-01-image-01-X78.png" alt="AI 提效在前端研发全流程中的探索全景图原始截图">
+      </details>
+    </section>
+
+    <section id="before" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">02 / Before Coding</div>
+          <h2>开发前：把问题暴露在开发之前</h2>
+        </div>
+        <p class="section-copy">需求理解不清会导致返工、联调反复、测试问题增多，甚至影响上线质量。AI 在这里承担的是需求收敛器和风险雷达。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card accent-blue">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h10"/><path d="M4 19h7"/></svg></div>
+          <h3>自动分析需求文档</h3>
+          <p>需求评审后，通过机器人自动提炼核心需求、拆解功能模块、识别风险点。</p>
+        </article>
+        <article class="card accent-green">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div>
+          <h3>对话式持续澄清</h3>
+          <p>通过一问一答逐步确认细节，避免一次性生成大量低价值文档。</p>
+        </article>
+        <article class="card accent-violet">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg></div>
+          <h3>规范化沉淀与协同</h3>
+          <p>本地创建开发分支、生成规范文档，并在线沉淀技术方案，统一产品、后端和测试上下文。</p>
+        </article>
+      </div>
+      <div class="quote">核心目标：在正式开发前完成需求收敛与技术澄清，把后置返工变成前置发现。</div>
+    </section>
+
+    <section id="d2c" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">03 / Design To Code</div>
+          <h2>开发中：AI 辅助设计稿还原与代码生成</h2>
+        </div>
+        <p class="section-copy">通用 Figma 转代码常常“能运行，但无法真正进入业务工程体系”。这里的关键是空间化重组、私有组件识别、工程规范落地与持续优化。</p>
+      </div>
+      <div class="flow" aria-label="AI 辅助设计稿还原流程">
+        <article class="flow-card"><span class="tag">01</span><h3>输入设计稿</h3><p>批量读取 Figma 节点、页面信息、样式信息和资源信息。</p></article>
+        <article class="flow-card"><span class="tag">02</span><h3>设计稿解析</h3><p>解析节点结构，补齐设计稿原始层级中不稳定的结构信息。</p></article>
+        <article class="flow-card"><span class="tag">03</span><h3>结构分析与优化</h3><p>层级分析、冗余节点识别、结构压缩、节点重组、无效节点剔除。</p></article>
+        <article class="flow-card"><span class="tag">04</span><h3>组件识别与映射</h3><p>识别团队私有组件，完成可扩展组件匹配与置信度评估。</p></article>
+        <article class="flow-card"><span class="tag">05</span><h3>样式转换与标准化</h3><p>样式合并优化、响应式转换、单位规范、类型与规范校验。</p></article>
+        <article class="flow-card"><span class="tag">06</span><h3>代码生成</h3><p>生成结构代码、样式代码、组件化输出、代码优化。</p></article>
+        <article class="flow-card"><span class="tag">07</span><h3>结果输出</h3><p>输出可直接使用的前端代码、组件代码、样式文件与代码片段。</p></article>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card accent-green">
+          <h3>关键设计</h3>
+          <ul class="mini-list">
+            <li>空间化重组：解决设计稿父子关系不明确的问题。</li>
+            <li>架构分析：组件拆分、多 agent 并行生成，再拼接整体代码。</li>
+            <li>数据收集：通过代码保留量评估 D2C 效果，支撑持续优化。</li>
+          </ul>
+        </article>
+        <article class="card accent-blue">
+          <h3>带来的价值</h3>
+          <ul class="mini-list">
+            <li>提升还原效率，减少手动还原时间。</li>
+            <li>提高还原质量，降低后续样式修复成本。</li>
+            <li>提升组件复用，降低开发成本并缩短交付周期。</li>
+          </ul>
+        </article>
+      </div>
+      <details class="source">
+        <summary>查看原始 PDF 图片来源：AI 辅助设计稿还原流程</summary>
+        <img src="assets/page-03-image-01-X136.png" alt="AI 辅助设计稿还原流程原始截图">
+      </details>
+    </section>
+
+    <section id="coding" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">04 / Coding Strategy</div>
+          <h2>代码生成：解决写不对、写不好、写不了</h2>
+        </div>
+        <p class="section-copy">代码生成不是把需求丢给 AI 就结束，而是用澄清、拆分、胶水编程、蓝图和知识库共同约束它，让结果真正可落地。</p>
+      </div>
+      <div class="flow" aria-label="AI 辅助代码生成整体方案流程">
+        <article class="flow-card"><span class="tag">Input</span><h3>需求输入</h3><p>用户提出业务需求，进入对话式澄清。</p></article>
+        <article class="flow-card"><span class="tag">Clarify</span><h3>需求澄清前置</h3><p>通过一问一答收敛问题，降低理解偏差。</p></article>
+        <article class="flow-card"><span class="tag">Split</span><h3>架构拆分</h3><p>拆分模块、组件和数据流，降低单次生成复杂度。</p></article>
+        <article class="flow-card"><span class="tag">Glue</span><h3>胶水编程策略</h3><p>优先复用已有模块，用最少胶水代码组合、封装和适配。</p></article>
+        <article class="flow-card"><span class="tag">Code</span><h3>生成代码</h3><p>基于澄清后的需求和架构生成工程代码。</p></article>
+        <article class="flow-card"><span class="tag">Map</span><h3>生成蓝图</h3><p>生成架构图、数据流、字段溯源，校验 AI 理解是否符合预期。</p></article>
+        <article class="flow-card"><span class="tag">Land</span><h3>输出与落地</h3><p>产出高质量代码并集成到项目中。</p></article>
+      </div>
+      <div class="problem-grid">
+        <article class="problem">
+          <h3>1. 写不对：需求理解偏差</h3>
+          <ul class="mini-list">
+            <li>业务逻辑理解偏差</li>
+            <li>状态流转错误</li>
+            <li>字段含义误解</li>
+            <li>边界场景遗漏</li>
+          </ul>
+          <div class="solution-row">
+            <div class="solution">需求澄清前置</div>
+            <div class="solution">架构拆分</div>
+            <div class="solution">胶水编程</div>
+            <div class="solution">生成蓝图</div>
+          </div>
+        </article>
+        <article class="problem">
+          <h3>2. 写不好：质量与规范问题</h3>
+          <ul class="mini-list">
+            <li>代码风格不统一</li>
+            <li>重复实现严重</li>
+            <li>结构不合理</li>
+            <li>可维护性差</li>
+          </ul>
+          <div class="solution-row">
+            <div class="solution">统一代码风格</div>
+            <div class="solution">统一目录结构</div>
+            <div class="solution">统一状态管理</div>
+            <div class="solution">统一组件规范</div>
+            <div class="solution">统一请求封装</div>
+          </div>
+        </article>
+        <article class="problem">
+          <h3>3. 写不了：不了解内部体系</h3>
+          <ul class="mini-list">
+            <li>不知道内部 SDK 用法</li>
+            <li>不知道工具函数能力</li>
+            <li>不知道组件封装方式</li>
+            <li>缺少业务上下文</li>
+          </ul>
+          <div class="solution-row">
+            <div class="solution">SDK 文档</div>
+            <div class="solution">组件文档</div>
+            <div class="solution">工具函数</div>
+            <div class="solution">最佳实践</div>
+            <div class="solution">业务代码示例</div>
+          </div>
+        </article>
+      </div>
+      <details class="source">
+        <summary>查看原始 PDF 图片来源：AI 辅助代码生成整体解决方案</summary>
+        <img src="assets/page-05-image-01-X149.png" alt="AI 辅助代码生成整体解决方案流程图原始截图">
+      </details>
+    </section>
+
+    <section id="debug" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">05 / Debug Collaboration</div>
+          <h2>联调自测：从人工排查转向 AI 辅助定位</h2>
+        </div>
+        <p class="section-copy">联调阶段最耗时的不是开发本身，而是问题定位、多方沟通、反复确认与修复。AI 适合处理日志、数据比对、错误归因和上下文关联。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card accent-orange">
+          <h3>常见阻塞</h3>
+          <ul class="mini-list">
+            <li>接口字段不一致、数据结构变化。</li>
+            <li>环境配置问题、状态异常难复现。</li>
+            <li>前后端理解偏差、日志信息不完整。</li>
+            <li>需要前端、后端、产品、测试多轮沟通。</li>
+          </ul>
+        </article>
+        <article class="card accent-green">
+          <h3>未来探索方向</h3>
+          <ul class="mini-list">
+            <li>接口异常分析：请求参数、返回结果、字段差异、状态码异常。</li>
+            <li>日志与错误聚合：Console、Network、服务端日志形成问题摘要。</li>
+            <li>问题归因辅助：判断前端、后端、配置或环境问题。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="quote">目标：减少重复沟通与低效排查，让研发更快聚焦真正的问题修复。</div>
+    </section>
+
+    <section id="review" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">06 / Code Review</div>
+          <h2>CR 阶段：让 Review 从看代码升级为风险分析</h2>
+        </div>
+        <p class="section-copy">传统 CR 受 Reviewer 精力、上下文完整度和全局影响分析能力限制。AI CR 平台的目标是在上线前识别更深层风险。</p>
+      </div>
+      <div class="flow" aria-label="AI 辅助代码 Review 流程">
+        <article class="flow-card"><span class="tag">01</span><h3>代码提交</h3><p>开发提交 PR/MR，触发 CR 流程。</p></article>
+        <article class="flow-card"><span class="tag">02</span><h3>AI 预分析</h3><p>识别变更范围，生成初步分析报告。</p></article>
+        <article class="flow-card"><span class="tag">03</span><h3>人工 Review</h3><p>Reviewer 查看 AI 报告，结合代码进行 Review。</p></article>
+        <article class="flow-card"><span class="tag">04</span><h3>问题确认与处理</h3><p>确认问题，提出修复建议，标记误报或忽略说明。</p></article>
+        <article class="flow-card"><span class="tag">05</span><h3>结果汇总</h3><p>生成 CR 结论、风险等级与评价。</p></article>
+        <article class="flow-card"><span class="tag">06</span><h3>上线决策</h3><p>通过 CR 后合入主干，进入测试或发布流程。</p></article>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card accent-blue">
+          <h3>当前核心能力</h3>
+          <ul class="mini-list">
+            <li>增量分析：基于 diff 分析本次改动真正带来的影响。</li>
+            <li>全链路影响分析：从局部到全局识别真实业务影响。</li>
+            <li>效果反馈正循环：误报、漏报和人工处理结果持续回流。</li>
+          </ul>
+        </article>
+        <article class="card accent-orange">
+          <h3>未来方向：上线风险分析</h3>
+          <ul class="mini-list">
+            <li>结合技术文档与架构设计理解业务背景。</li>
+            <li>参考历史问题、风险案例和最佳实践。</li>
+            <li>从“最后一道质量卡”升级为完整上线风险评估。</li>
+          </ul>
+        </article>
+      </div>
+      <details class="source">
+        <summary>查看原始 PDF 图片来源：CR 风险分析流程</summary>
+        <img src="assets/page-09-image-01-X214.png" alt="AI 辅助代码 Review 与风险分析流程图原始截图">
+      </details>
+    </section>
+
+    <section id="test" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">07 / Test Checklist</div>
+          <h2>测试阶段：自动生成基于上下文的自测 Checklist</h2>
+        </div>
+        <p class="section-copy">很多问题不是不会测，而是边界场景、异常流程、状态覆盖和回归范围容易遗漏。AI 可以把“凭经验自测”升级为“系统化检查”。</p>
+      </div>
+      <div class="checklist">
+        <div class="check"><b>主流程检查</b><span>确保核心业务路径完整可用。</span></div>
+        <div class="check"><b>边界场景</b><span>覆盖极值、空值、缺省和边缘状态。</span></div>
+        <div class="check"><b>异常流程</b><span>覆盖接口异常、状态异常和重试逻辑。</span></div>
+        <div class="check"><b>权限校验</b><span>覆盖角色、可见性和操作权限。</span></div>
+        <div class="check"><b>状态切换</b><span>检查多状态流转和 UI 反馈。</span></div>
+        <div class="check"><b>接口异常</b><span>检查失败、超时、字段缺失和格式变化。</span></div>
+        <div class="check"><b>空数据场景</b><span>检查空态、加载态和兜底文案。</span></div>
+        <div class="check"><b>回归影响范围</b><span>结合变更识别需要回归的页面和模块。</span></div>
+      </div>
+      <div class="quote">最终实现：减少遗漏问题、提升自测覆盖率、降低低级 Bug、缩短测试沟通成本。</div>
+    </section>
+
+    <section id="ops" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">08 / After Release</div>
+          <h2>发布后：AI 助力线上运营、巡检与知识沉淀</h2>
+        </div>
+        <p class="section-copy">发布之后研发工作并没有结束。线上阶段更关注风险发现、问题定位、经验沉淀与长期可维护性。</p>
+      </div>
+      <div class="loop" aria-label="发布后 AI 闭环流程">
+        <article class="loop-step"><b>知识库沉淀</b><span>沉淀新路由、新工具、新组件、新业务能力和历史问题案例。</span></article>
+        <article class="loop-step"><b>自动巡检</b><span>结合发布时间与 CR 风险分析结果，自动触发线上巡检。</span></article>
+        <article class="loop-step"><b>线上监控与问题分析</b><span>整合告警、用户反馈、页面异常、日志与调用链路，辅助定位根因。</span></article>
+        <article class="loop-step"><b>自主修复</b><span>未来逐步完成配置降级、风险功能下线、异常状态恢复和修复方案生成。</span></article>
+        <article class="loop-step"><b>沉淀与反馈</b><span>分析结果自动沉淀，反馈知识库、风险模式和 AI 能力。</span></article>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card accent-violet">
+          <h3>多源数据接入</h3>
+          <ul class="mini-list">
+            <li>监控指标、日志数据、调用链路、用户反馈和业务数据。</li>
+            <li>AI 智能分析引擎负责关联分析、根因定位、模式识别、影响评估和趋势预测。</li>
+          </ul>
+        </article>
+        <article class="card accent-green">
+          <h3>最终目标</h3>
+          <ul class="mini-list">
+            <li>形成研发全流程的 AI 闭环能力。</li>
+            <li>风险自动发现，问题自动分析，经验自动沉淀。</li>
+            <li>部分问题自动修复，降低人工干预成本。</li>
+          </ul>
+        </article>
+      </div>
+      <details class="source">
+        <summary>查看原始 PDF 图片来源：发布后研发阶段流程</summary>
+        <img src="assets/page-11-image-01-X247.png" alt="发布后研发阶段 AI 助力线上运营与持续进化流程图原始截图">
+      </details>
+    </section>
+
+    <section class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">09 / Conclusion</div>
+          <h2>结论：AI 提效的本质是工程能力升级</h2>
+        </div>
+        <p class="section-copy">AI 在前端领域的价值不是替代单点工作，而是把研发流程中的经验、上下文和反馈机制产品化。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="dot">1</div><div class="timeline-body"><h3>从“写页面”到“管理全生命周期”</h3><p>前端研发已经覆盖需求理解、方案设计、开发联调、质量保障、发布运维和线上问题处理。</p></div></div>
+        <div class="timeline-item"><div class="dot">2</div><div class="timeline-body"><h3>从“AI 生成代码”到“AI 理解工程体系”</h3><p>通过规范、知识库、蓝图、组件映射与反馈闭环，让生成结果真正进入业务工程。</p></div></div>
+        <div class="timeline-item"><div class="dot">3</div><div class="timeline-body"><h3>从“局部提效”到“流程闭环”</h3><p>数据反馈持续优化 AI 能力，形成越用越智能、越用越高效的正循环。</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <p>Based on PDF: AI提效在前端领域的探索 · Converted to interactive HTML report</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
