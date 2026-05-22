@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI 提效在前端研发全流程中的探索</title>
+  <title>咨询报告风 · AI 提效报告</title>
   <style>
     :root {
       --bg: #020617;
@@ -407,7 +407,7 @@
       --stage-accent: var(--blue);
       --stage-soft: rgba(56, 189, 248, .16);
       --stage-border: rgba(56, 189, 248, .46);
-      min-height: 198px;
+      min-height: 260px;
       padding: 16px 14px 14px 18px;
       border: 1px solid var(--stage-border);
       border-radius: var(--radius);
@@ -539,11 +539,44 @@
       font-size: 14px;
     }
 
-    .stage small {
-      display: inline-flex;
-      margin-top: 12px;
+    .stage-values {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .stage-values b {
+      display: block;
+      margin-bottom: 6px;
       color: #dcfce7;
-      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .stage-values ul {
+      display: grid;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .stage-values li {
+      display: flex;
+      gap: 7px;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .stage-values li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--stage-accent);
+      box-shadow: 0 0 12px var(--stage-accent);
+      flex: 0 0 auto;
     }
 
     .value-row {
@@ -559,6 +592,28 @@
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background: rgba(2, 6, 23, .54);
+    }
+
+    .value-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      color: var(--blue);
+      background: rgba(56, 189, 248, .12);
+      border: 1px solid rgba(56, 189, 248, .24);
+    }
+
+    .value-icon svg {
+      width: 23px;
+      height: 23px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .value b {
@@ -739,6 +794,8 @@
     }
 
     .problem {
+      display: flex;
+      flex-direction: column;
       padding: 20px;
       border-radius: var(--radius);
       border: 1px solid var(--line);
@@ -750,11 +807,187 @@
       font-size: 20px;
     }
 
+    .problem-note {
+      margin: 0 0 14px;
+      padding: 12px 14px;
+      border-left: 4px solid #c2410c;
+      border-radius: var(--radius);
+      background: #fff7ed;
+      color: #7c2d12;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .problem > .mini-list {
+      flex: 1;
+      align-content: start;
+    }
+
+    .glue-explain {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius);
+      background: #fff7ed;
+    }
+
+    .glue-explain b {
+      display: block;
+      margin-bottom: 6px;
+      color: #7c2d12;
+      font-size: 14px;
+    }
+
+    .glue-explain p {
+      margin: 0;
+      color: #7c2d12;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .glue-diagram {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .glue-stack {
+      display: grid;
+      gap: 6px;
+    }
+
+    .glue-chip,
+    .glue-result,
+    .glue-bridge {
+      min-height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 6px 8px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .glue-chip {
+      color: #14532d;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+    }
+
+    .glue-bridge {
+      color: #ffffff;
+      background: #c2410c;
+      position: relative;
+    }
+
+    .glue-bridge::before,
+    .glue-bridge::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 2px;
+      background: #c2410c;
+      transform: translateY(-50%);
+    }
+
+    .glue-bridge::before { left: -8px; }
+    .glue-bridge::after { right: -8px; }
+
+    .glue-result {
+      color: #1e3a8a;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+
+    .blueprint-explain {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius);
+      background: #eff6ff;
+    }
+
+    .blueprint-explain b {
+      display: block;
+      margin-bottom: 6px;
+      color: #1e3a8a;
+      font-size: 14px;
+    }
+
+    .blueprint-explain p {
+      margin: 0;
+      color: #1e3a8a;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .blueprint-diagram {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) 24px minmax(0, 1.15fr) 24px minmax(0, .9fr);
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .blue-node,
+    .blue-check {
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      padding: 7px 8px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .blue-node {
+      color: #1e3a8a;
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+    }
+
+    .blue-stack {
+      display: grid;
+      gap: 6px;
+    }
+
+    .blue-check {
+      color: #ffffff;
+      background: #1d4ed8;
+    }
+
+    .blue-arrow {
+      color: #1d4ed8;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .concept-grid .glue-explain,
+    .concept-grid .blueprint-explain {
+      margin-top: 0;
+      min-height: 100%;
+    }
+
     .solution-row {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 10px;
-      margin-top: 16px;
+      margin-top: auto;
+      padding-top: 16px;
     }
 
     .solution {
@@ -884,6 +1117,151 @@
       font-weight: 800;
     }
 
+    .detail-flow {
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .detail-flow-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(15, 23, 42, .04);
+    }
+
+    .detail-flow-head h3 {
+      margin: 0;
+      color: var(--text);
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    .detail-flow-head p {
+      max-width: 430px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .detail-steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .detail-step {
+      position: relative;
+      min-height: 170px;
+      padding: 18px 16px 16px;
+      border-right: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .detail-step:last-child {
+      border-right: 0;
+    }
+
+    .detail-step::after {
+      content: "";
+      position: absolute;
+      top: 36px;
+      right: -7px;
+      z-index: 1;
+      width: 14px;
+      height: 14px;
+      border-top: 2px solid #c2410c;
+      border-right: 2px solid #c2410c;
+      background: #ffffff;
+      transform: rotate(45deg);
+    }
+
+    .detail-step:last-child::after {
+      display: none;
+    }
+
+    .detail-symbol {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .detail-index {
+      min-width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #ffffff;
+      background: #111827;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .detail-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #111827;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+    }
+
+    .detail-icon svg {
+      width: 27px;
+      height: 27px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .detail-step:nth-child(2) .detail-icon {
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .detail-step:nth-child(3) .detail-icon {
+      color: #15803d;
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .detail-step:nth-child(4) .detail-icon {
+      color: #7c3aed;
+      background: #f5f3ff;
+      border-color: #ddd6fe;
+    }
+
+    .detail-step:nth-child(5) .detail-icon {
+      color: #be123c;
+      background: #fff1f2;
+      border-color: #fecdd3;
+    }
+
+    .detail-step h4 {
+      margin: 14px 0 8px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .detail-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
     .source {
       margin-top: 18px;
       border: 1px solid rgba(148, 163, 184, .16);
@@ -958,6 +1336,40 @@
       .solution-row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .concept-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-flow-head {
+        display: block;
+      }
+
+      .detail-flow-head p {
+        margin-top: 8px;
+      }
+
+      .detail-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-step {
+        min-height: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .detail-step:last-child {
+        border-bottom: 0;
+      }
+
+      .detail-step::after {
+        top: auto;
+        right: auto;
+        left: 28px;
+        bottom: -8px;
+        transform: rotate(135deg);
+      }
     }
 
     @media (max-width: 640px) {
@@ -977,6 +1389,7 @@
       .phase-head { display: block; }
       .phase-meta { display: block; margin-top: 4px; }
       .solution-row { grid-template-columns: 1fr; }
+      .detail-steps { grid-template-columns: 1fr; }
       section { padding: 54px 0; }
     }
 
@@ -988,8 +1401,431 @@
       }
     }
   </style>
+<style id="variant-overrides">
+
+  :root { --bg:#fbfaf7; --panel:#ffffff; --panel-strong:#ffffff; --line:rgba(31,41,55,.16); --text:#111827; --muted:#4b5563; --soft:#374151; --blue:#1d4ed8; --green:#15803d; --violet:#7c3aed; --orange:#c2410c; --rose:#be123c; --amber:#b45309; --radius:6px; }
+  
+  html { background: #f7f9fc; }
+  body { color: #0f172a; background: #f7f9fc; }
+  body::before { opacity: .36; background-image: linear-gradient(rgba(15,23,42,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,.045) 1px, transparent 1px); }
+  body::after { display: none; }
+  .nav { background: rgba(255,255,255,.88); border-color: rgba(15,23,42,.12); box-shadow: 0 12px 34px rgba(15,23,42,.08); }
+  .brand, .nav-links a, .btn, .source summary { color: #0f172a; }
+  .nav-links a:hover, .nav-links a:focus-visible { background: rgba(14,116,144,.08); color: #075985; }
+  .brand-mark, .icon-box { background: #0f766e; box-shadow: none; }
+  .brand svg, .icon-box svg { stroke: #ffffff; }
+  .eyebrow { background: #e0f2fe; border-color: #bae6fd; color: #075985; }
+  .pulse { background: #0ea5e9; box-shadow: 0 0 0 8px rgba(14,165,233,.13); }
+  h1, h2, .phase-title, .card h3, .flow-card h3, .stage h3, .problem h3, .timeline-body h3, .loop-step b, .check b, .value b { color: #0f172a; }
+  h1 .grad { color: #0f172a; background: none; -webkit-background-clip: initial; background-clip: initial; text-shadow: none; }
+  .lead, .section-copy, .stage p, .card p, .flow-card p, .problem, .timeline-body p, .check span, .loop-step, .metric span, .phase-meta { color: #475569; }
+  .btn { background: #ffffff; border-color: #cbd5e1; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+  .btn.primary { color: #ffffff; background: #0f766e; border-color: #0f766e; }
+  .signal-board, .strip, .card, .problem, .timeline-body, .source, .flow, .check, .loop-step, .metric, .phase-group, .value { background: rgba(255,255,255,.92); border-color: rgba(15,23,42,.13); box-shadow: 0 12px 28px rgba(15,23,42,.07); }
+  .board-top { border-color: rgba(15,23,42,.11); color: #64748b; }
+  .metrics { background: rgba(15,23,42,.1); }
+  .metric b { color: #0f766e !important; }
+  .kicker, .value span { color: #0f766e; }
+  .phase-head { border-color: rgba(15,23,42,.1); background: #e0f2fe; }
+  .phase-group.dev .phase-head { background: #dcfce7; }
+  .phase-group.ops .phase-head { background: #ede9fe; }
+  .stage, .flow-card { background: #ffffff; box-shadow: inset 4px 0 0 var(--stage-accent, var(--flow-accent)), 0 10px 22px rgba(15,23,42,.07); }
+  .flow-card { box-shadow: inset 4px 0 0 var(--flow-accent), 0 10px 22px rgba(15,23,42,.07); }
+  .stage-values { border-color: rgba(15,23,42,.1); }
+  .stage-values b { color: #0f172a; }
+  .stage-values li, .mini-list li { color: #334155; }
+  .quote { color: #14532d; background: #dcfce7; border-color: #22c55e; }
+
+  html, body { background: #fbfaf7; }
+  body::before { display: none; }
+  .shell { width: min(1120px, calc(100vw - 44px)); }
+  .nav { border-radius: 6px; border-color: #d1d5db; }
+  .nav { overflow: hidden; }
+  .nav-links { min-width: 0; max-width: 100%; }
+  .brand-mark, .icon-box { background: #111827; }
+  .eyebrow { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+  .pulse { background:#f97316; box-shadow: 0 0 0 8px rgba(249,115,22,.12); }
+  h1 { font-size: clamp(38px, 5.4vw, 72px); color:#111827; }
+  h2 { font-size: clamp(28px, 3.7vw, 46px); }
+  .kicker { color:#c2410c; }
+  .section-head { align-items:start; padding-left: 18px; border-left: 5px solid #111827; }
+  .signal-board, .strip, .card, .problem, .timeline-body, .source, .flow, .check, .loop-step, .metric, .phase-group, .value { box-shadow: none; border-color: #d1d5db; }
+  .phase-head { background:#f3f4f6; }
+  .phase-group.dev .phase-head { background:#ecfdf5; }
+  .phase-group.ops .phase-head { background:#f5f3ff; }
+  .metric b, .value span { color:#1d4ed8 !important; }
+  .stage, .flow-card { border-radius: 6px; background:#ffffff; box-shadow: inset 5px 0 0 var(--stage-accent, var(--flow-accent)); }
+  .flow-card { box-shadow: inset 5px 0 0 var(--flow-accent); }
+  .quote { background:#fff7ed; color:#7c2d12; border-color:#f97316; }
+
+  .theme-variant-consulting .flow {
+    background: #f8fafc;
+    border-color: #b8c2cf;
+    box-shadow: inset 0 0 0 1px #eef2f7;
+  }
+
+  .theme-variant-consulting .flow-card {
+    border: 2px solid var(--flow-accent-border);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--flow-accent) 12%, #ffffff), #ffffff 54%);
+    box-shadow:
+      inset 6px 0 0 var(--flow-accent),
+      0 8px 18px rgba(15, 23, 42, .06);
+  }
+
+  .theme-variant-consulting .flow-card h3 {
+    color: #0f172a;
+    font-weight: 900;
+  }
+
+  .theme-variant-consulting .flow-card p {
+    color: #334155;
+  }
+
+  .theme-variant-consulting .flow-card::before {
+    height: 4px;
+    background: var(--flow-accent);
+    opacity: 1;
+  }
+
+  .theme-variant-consulting .flow-card::after {
+    background: var(--flow-accent);
+    box-shadow: none;
+  }
+
+  .theme-variant-consulting .tag {
+    color: #ffffff;
+    border-color: transparent;
+    background: var(--flow-accent);
+    box-shadow: none;
+  }
+
+  .theme-variant-consulting .flow-card:nth-child(7) .tag {
+    color: #111827;
+  }
+
+  .theme-variant-consulting .problem,
+  .theme-variant-consulting .card,
+  .theme-variant-consulting .check,
+  .theme-variant-consulting .value {
+    border-color: #c5ceda;
+  }
+
+  .theme-variant-consulting .solution {
+    min-height: 64px;
+    color: #111827;
+    background: #f8fafc;
+    border: 1px solid #aeb8c6;
+    border-left: 5px solid #475569;
+    font-weight: 900;
+  }
+
+  .theme-variant-consulting .problem:nth-child(1) .solution {
+    border-left-color: #c2410c;
+    background: #fff7ed;
+  }
+
+  .theme-variant-consulting .problem:nth-child(2) .solution {
+    border-left-color: #1d4ed8;
+    background: #eff6ff;
+  }
+
+  .theme-variant-consulting .problem:nth-child(3) .solution {
+    border-left-color: #15803d;
+    background: #f0fdf4;
+  }
+
+  .theme-variant-consulting .glue-explain,
+  .theme-variant-consulting .blueprint-explain,
+  .theme-variant-consulting .problem-note {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
+  }
+
+  .theme-variant-consulting .check b {
+    color: #111827;
+  }
+
+  .theme-variant-consulting .check span {
+    color: #334155;
+  }
+
+  .theme-variant-consulting #overview .section-head {
+    margin-bottom: 18px;
+  }
+
+  .theme-variant-consulting #overview .strip {
+    background: #ffffff;
+    border-color: #cfd6df;
+  }
+
+  .theme-variant-consulting #overview .phase-map {
+    gap: 0;
+    padding: 0;
+  }
+
+  .theme-variant-consulting #overview .phase-group {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    border: 0;
+    border-bottom: 1px solid #d7dde5;
+    border-radius: 0;
+    background: #ffffff;
+  }
+
+  .theme-variant-consulting #overview .phase-group:last-child {
+    border-bottom: 0;
+  }
+
+  .theme-variant-consulting #overview .phase-head {
+    display: block;
+    min-height: auto;
+    padding: 18px;
+    border-right: 1px solid #d7dde5;
+    border-bottom: 0;
+    background: #f8fafc;
+  }
+
+  .theme-variant-consulting #overview .phase-group.dev .phase-head {
+    background: #f0fdf4;
+  }
+
+  .theme-variant-consulting #overview .phase-group.ops .phase-head {
+    background: #f5f3ff;
+  }
+
+  .theme-variant-consulting #overview .phase-title {
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  .theme-variant-consulting #overview .phase-meta {
+    display: block;
+    margin-top: 10px;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .theme-variant-consulting #overview .phase-steps,
+  .theme-variant-consulting #overview .phase-group.pre .phase-steps,
+  .theme-variant-consulting #overview .phase-group.dev .phase-steps,
+  .theme-variant-consulting #overview .phase-group.ops .phase-steps {
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 0;
+    padding: 0;
+  }
+
+  .theme-variant-consulting #overview .stage {
+    min-height: 0;
+    padding: 16px 14px 14px;
+    border: 0;
+    border-right: 1px solid #e5e7eb;
+    border-radius: 0;
+    background: #ffffff;
+    box-shadow: inset 0 4px 0 var(--stage-accent);
+  }
+
+  .theme-variant-consulting #overview .stage:last-child {
+    border-right: 0;
+  }
+
+  .theme-variant-consulting #overview .stage::before {
+    display: none;
+  }
+
+  .theme-variant-consulting #overview .stage-num {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    box-shadow: none;
+  }
+
+  .theme-variant-consulting #overview .stage h3 {
+    margin: 10px 0 6px;
+    font-size: 16px;
+  }
+
+  .theme-variant-consulting #overview .stage p {
+    min-height: 66px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .theme-variant-consulting #overview .stage-values {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid #edf0f3;
+  }
+
+  .theme-variant-consulting #overview .stage-values b {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #111827;
+  }
+
+  .theme-variant-consulting #overview .stage-values ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .theme-variant-consulting #overview .stage-values li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--stage-accent) 10%, #ffffff);
+    color: #374151;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .theme-variant-consulting #overview .stage-values li::before {
+    display: none;
+  }
+
+  .theme-variant-consulting #overview .value-row {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin-top: 12px;
+  }
+
+  .theme-variant-consulting #overview .value {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 12px;
+    min-height: 94px;
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #b8c2cf;
+    border-top: 4px solid var(--value-accent, #1d4ed8);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, .06);
+  }
+
+  .theme-variant-consulting #overview .value-icon {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 0;
+    border-width: 2px;
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(1) {
+    --value-accent: #2563eb;
+    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 68%);
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(1) .value-icon {
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(2) {
+    --value-accent: #16a34a;
+    background: linear-gradient(180deg, #f7fff9 0%, #ffffff 68%);
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(2) .value-icon {
+    color: #16a34a;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(3) {
+    --value-accent: #7c3aed;
+    background: linear-gradient(180deg, #fbf9ff 0%, #ffffff 68%);
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(3) .value-icon {
+    color: #7c3aed;
+    background: #f5f3ff;
+    border-color: #ddd6fe;
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(4) {
+    --value-accent: #e11d48;
+    background: linear-gradient(180deg, #fff8fa 0%, #ffffff 68%);
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(4) .value-icon {
+    color: #e11d48;
+    background: #fff1f2;
+    border-color: #fecdd3;
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(5) {
+    --value-accent: #0f766e;
+    background: linear-gradient(180deg, #f5fffd 0%, #ffffff 68%);
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(5) .value-icon {
+    color: #0f766e;
+    background: #f0fdfa;
+    border-color: #99f6e4;
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(6) {
+    --value-accent: #ea580c;
+    background: linear-gradient(180deg, #fffaf5 0%, #ffffff 68%);
+  }
+
+  .theme-variant-consulting #overview .value:nth-child(6) .value-icon {
+    color: #ea580c;
+    background: #fff7ed;
+    border-color: #fed7aa;
+  }
+
+  .theme-variant-consulting #overview .value b {
+    margin-bottom: 3px;
+    color: #111827;
+    font-size: 14px;
+  }
+
+  .theme-variant-consulting #overview .value span {
+    color: var(--value-accent, #1d4ed8) !important;
+    font-size: 19px;
+    letter-spacing: .2px;
+  }
+
+  @media (max-width: 980px) {
+    .theme-variant-consulting #overview .phase-group {
+      grid-template-columns: 1fr;
+    }
+    .theme-variant-consulting #overview .phase-head {
+      border-right: 0;
+      border-bottom: 1px solid #d7dde5;
+    }
+    .theme-variant-consulting #overview .stage {
+      border-right: 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .theme-variant-consulting #overview .stage-values li {
+      white-space: normal;
+    }
+    .theme-variant-consulting .flow {
+      grid-template-columns: 1fr;
+      overflow-x: visible;
+    }
+    .theme-variant-consulting .flow-card {
+      min-width: 0;
+      border-right: 0;
+    }
+    .theme-variant-consulting .flow-card::after {
+      display: none;
+    }
+    .theme-variant-consulting #overview .value-row {
+      grid-template-columns: 1fr;
+    }
+    .theme-variant-consulting #overview .value {
+      min-width: 0;
+    }
+  }
+
+</style>
 </head>
-<body>
+<body class="theme-variant-consulting">
   <nav class="nav" aria-label="报告导航">
     <a class="brand" href="#top" aria-label="返回顶部">
       <span class="brand-mark" aria-hidden="true">
@@ -1013,7 +1849,7 @@
     <header class="hero shell">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> AI 提效报告 · 前端研发全生命周期</div>
+          <div class="eyebrow"><span class="pulse"></span> 咨询报告风 · 前端研发全生命周期</div>
           <h1>AI 提效在<span class="grad">前端研发全流程</span>中的探索</h1>
           <p class="lead">从需求理解、方案设计、代码生成、联调自测、代码 Review 到发布后巡检，AI 的价值不只是“帮忙写代码”，而是把重复沟通、经验判断和上下文整理变成可沉淀、可反馈、可进化的工程能力。</p>
           <div class="hero-actions">
@@ -1058,8 +1894,8 @@
               <span class="phase-meta">Steps 01-02 · 需求收敛 / 决策前置</span>
             </div>
             <div class="phase-steps">
-              <article class="stage"><div class="stage-num">1</div><h3>需求分析与澄清</h3><p>自动分析需求、提炼核心信息、识别风险并持续澄清。</p><small>价值：提升需求分析效率</small></article>
-              <article class="stage"><div class="stage-num">2</div><h3>自主判断可 AI 化</h3><p>判断任务是否可由 AI 自动完成，并生成执行方案。</p><small>价值：减少决策时间</small></article>
+              <article class="stage"><div class="stage-num">1</div><h3>需求分析与澄清</h3><p>自动分析需求、提炼核心信息、识别风险并持续澄清。</p><div class="stage-values"><b>价值</b><ul><li>提升需求分析效率</li><li>降低理解偏差</li><li>提前暴露风险</li></ul></div></article>
+              <article class="stage"><div class="stage-num">2</div><h3>自主判断可 AI 化</h3><p>判断任务是否可由 AI 自动完成，并生成执行方案。</p><div class="stage-values"><b>价值</b><ul><li>减少决策时间</li><li>提升任务拆解效率</li><li>降低人工投入</li></ul></div></article>
             </div>
           </div>
 
@@ -1069,11 +1905,11 @@
               <span class="phase-meta">Steps 03-07 · 生成 / 联调自测 / CR / 测试</span>
             </div>
             <div class="phase-steps">
-              <article class="stage"><div class="stage-num">3</div><h3>设计稿还原</h3><p>解析设计稿，生成工程化、可复用的前端代码。</p><small>价值：提升设计到代码转换效率</small></article>
-              <article class="stage"><div class="stage-num">4</div><h3>代码生成</h3><p>基于需求与规范生成高质量、可维护代码。</p><small>价值：提升代码生成效率与质量</small></article>
-              <article class="stage"><div class="stage-num">5</div><h3>联调自测</h3><p>辅助日志分析、问题定位，并自动生成自测 Checklist 覆盖关键场景。</p><small>价值：提升定位效率与自测覆盖率</small></article>
-              <article class="stage"><div class="stage-num">6</div><h3>Code Review</h3><p>智能分析代码风险与影响，辅助 Review 决策。</p><small>价值：缺陷拦截率提升</small></article>
-              <article class="stage"><div class="stage-num">7</div><h3>测试</h3><p>自动生成测试用例并辅助执行，提高测试覆盖率。</p><small>价值：测试效率提升</small></article>
+              <article class="stage"><div class="stage-num">3</div><h3>设计稿还原</h3><p>解析设计稿，生成工程化、可复用的前端代码。</p><div class="stage-values"><b>价值</b><ul><li>提升还原效率</li><li>降低重复开发</li><li>提高还原质量</li></ul></div></article>
+              <article class="stage"><div class="stage-num">4</div><h3>代码生成</h3><p>基于需求与规范生成高质量、可维护代码。</p><div class="stage-values"><b>价值</b><ul><li>生成更准确的代码</li><li>符合工程规范</li><li>提高开发效率</li></ul></div></article>
+              <article class="stage"><div class="stage-num">5</div><h3>联调自测</h3><p>当前已用于生成测试用例辅助自测，后续可继续探索日志分析、问题定位和异常归因。</p><div class="stage-values"><b>价值</b><ul><li>提升自测覆盖率</li><li>减少沟通成本</li><li>缩短定位时间</li></ul></div></article>
+              <article class="stage"><div class="stage-num">6</div><h3>Code Review</h3><p>智能分析代码风险与影响，辅助 Review 决策。</p><div class="stage-values"><b>价值</b><ul><li>提前发现风险</li><li>降低线上事故率</li><li>提升代码质量</li></ul></div></article>
+              <article class="stage"><div class="stage-num">7</div><h3>测试</h3><p>正在探索自动化测试方向，重点验证 AI 在用例生成、回归辅助和执行分析中的价值。</p><div class="stage-values"><b>价值</b><ul><li>降低人工回归成本</li><li>减少漏测风险</li><li>提升测试效率</li></ul></div></article>
             </div>
           </div>
 
@@ -1083,22 +1919,22 @@
               <span class="phase-meta">Steps 08-12 · 沉淀 / 巡检 / 分析 / 修复</span>
             </div>
             <div class="phase-steps">
-              <article class="stage"><div class="stage-num">8</div><h3>知识库沉淀</h3><p>沉淀文档与经验，构建团队知识资产。</p><small>价值：知识复用效率提升</small></article>
-              <article class="stage"><div class="stage-num">9</div><h3>自动巡检</h3><p>基于发布与风险分析，自动巡检关键页面。</p><small>价值：巡检效率提升</small></article>
-              <article class="stage"><div class="stage-num">10</div><h3>智能监控</h3><p>智能监控异常、关联分析并快速发现问题。</p><small>价值：异常发现效率提升</small></article>
-              <article class="stage"><div class="stage-num">11</div><h3>问题分析</h3><p>结合日志与链路分析，定位根因并提供修复建议。</p><small>价值：问题定位效率提升</small></article>
-              <article class="stage"><div class="stage-num">12</div><h3>自主修复</h3><p>自动执行修复方案，回滚或降低故障影响。</p><small>价值：故障修复效率提升</small></article>
+              <article class="stage"><div class="stage-num">8</div><h3>知识库沉淀</h3><p>沉淀文档与经验，构建团队知识资产。</p><div class="stage-values"><b>价值</b><ul><li>提升复用效率</li><li>沉淀团队经验</li><li>加速新人成长</li></ul></div></article>
+              <article class="stage"><div class="stage-num">9</div><h3>自动巡检</h3><p>基于发布与风险分析，自动巡检关键页面。</p><div class="stage-values"><b>价值</b><ul><li>替代人工回归</li><li>快速发现问题</li><li>降低遗漏概率</li></ul></div></article>
+              <article class="stage"><div class="stage-num">10</div><h3>智能监控</h3><p>智能监控异常、关联分析并快速发现问题。</p><div class="stage-values"><b>价值</b><ul><li>更快发现异常</li><li>减少排查时间</li><li>提升运维效率</li></ul></div></article>
+              <article class="stage"><div class="stage-num">11</div><h3>问题分析</h3><p>结合日志与链路分析，定位根因并提供修复建议。</p><div class="stage-values"><b>价值</b><ul><li>缩短定位时间</li><li>提升根因判断</li><li>降低故障影响</li></ul></div></article>
+              <article class="stage"><div class="stage-num">12</div><h3>自主修复</h3><p>自动执行修复方案，回滚或降低故障影响。</p><div class="stage-values"><b>价值</b><ul><li>减少人工干预</li><li>提升恢复速度</li><li>降低业务损失</li></ul></div></article>
             </div>
           </div>
         </div>
       </div>
       <div class="value-row">
-        <div class="value"><b>效率提升</b><span>30%-40%</span></div>
-        <div class="value"><b>代码质量提升</b><span>20%-40%</span></div>
-        <div class="value"><b>协同沟通时间降低</b><span>40%-50%</span></div>
-        <div class="value"><b>上线风险降低</b><span>20%-40%</span></div>
-        <div class="value"><b>定位时间缩短</b><span>50%-70%</span></div>
-        <div class="value"><b>运维成本降低</b><span>30%-40%</span></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 3 5-7"/><path d="M17 7h2v2"/></svg></div><div><b>效率提升</b><span>30%-40%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7z"/><path d="m9 12 2 2 4-5"/></svg></div><div><b>代码质量提升</b><span>20%-40%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M16 21a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 11v2a4 4 0 0 0 4 4h0"/><path d="M16 13v-2a4 4 0 0 0-4-4h0"/></svg></div><div><b>协同沟通时间降低</b><span>40%-50%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 7l9 14 9-14z"/><path d="M12 8v5"/><path d="M12 17h.01"/></svg></div><div><b>上线风险降低</b><span>20%-40%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M11 7v4l3 2"/></svg></div><div><b>定位时间缩短</b><span>50%-70%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M6 7h9a4 4 0 0 1 0 8H6"/><path d="M6 11h10"/></svg></div><div><b>运维成本降低</b><span>30%-40%</span></div></div>
       </div>
       <details class="source">
         <summary>查看原始 PDF 图片来源：全景图</summary>
@@ -1118,7 +1954,7 @@
         <article class="card accent-blue">
           <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h10"/><path d="M4 19h7"/></svg></div>
           <h3>自动分析需求文档</h3>
-          <p>需求评审后，通过机器人自动提炼核心需求、拆解功能模块、识别风险点。</p>
+          <p>需求内容混杂，格式不规范，通过AI自动提炼核心需求、拆解功能模块、识别风险点。</p>
         </article>
         <article class="card accent-green">
           <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div>
@@ -1130,6 +1966,64 @@
           <h3>规范化沉淀与协同</h3>
           <p>本地创建开发分支、生成规范文档，并在线沉淀技术方案，统一产品、后端和测试上下文。</p>
         </article>
+      </div>
+      <div class="detail-flow" aria-label="开发前 AI 辅助需求收敛详细流程">
+        <div class="detail-flow-head">
+          <h3>开发前辅助流程</h3>
+          <p>从需求评审结束开始，把信息提炼、风险识别、分支准备、细节澄清和协同沉淀串成一条可复用流程。</p>
+        </div>
+        <div class="detail-steps">
+          <article class="detail-step">
+            <div class="detail-symbol">
+              <div class="detail-index">01</div>
+              <div class="detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 7V4"/><path d="M9 4h6"/><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M8 18v2"/><path d="M16 18v2"/></svg>
+              </div>
+            </div>
+            <h4>@机器人分析需求文档</h4>
+            <p>需求评审后，通过 @机器人 自动读取需求文档，进入 AI 辅助分析流程。</p>
+          </article>
+          <article class="detail-step">
+            <div class="detail-symbol">
+              <div class="detail-index">02</div>
+              <div class="detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 5h10"/><path d="M4 10h16"/><path d="M4 15h8"/><path d="M17 14l3 3"/><circle cx="15" cy="12" r="3"/></svg>
+              </div>
+            </div>
+            <h4>提炼需求与创建分支</h4>
+            <p>自动提炼核心需求，本地自动创建开发分支。</p>
+          </article>
+          <article class="detail-step">
+            <div class="detail-symbol">
+              <div class="detail-index">03</div>
+              <div class="detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6 4v6a4 4 0 0 0 4 4h2"/><path d="M6 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M18 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M14 7h5"/><path d="M17 4v6"/></svg>
+              </div>
+            </div>
+            <h4>规范化prd文档</h4>
+            <p>拆解功能模块，并识别边界、依赖和潜在风险点，生成规范化文档，降低开工准备成本。</p>
+          </article>
+          <article class="detail-step">
+            <div class="detail-symbol">
+              <div class="detail-index">04</div>
+              <div class="detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 12a4 4 0 0 1-4 4H9l-5 4v-4a4 4 0 0 1-1-8 4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 10h8"/><path d="M8 13h5"/></svg>
+              </div>
+            </div>
+            <h4>对话式持续澄清</h4>
+            <p>通过一问一答持续澄清需求细节，把不确定点前置到开发之前。</p>
+          </article>
+          <article class="detail-step">
+            <div class="detail-symbol">
+              <div class="detail-index">05</div>
+              <div class="detail-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6z"/><path d="M15 4v4h4"/><path d="M8 13h8"/><path d="M8 16h5"/><path d="M4 9H2"/><path d="M22 9h-2"/></svg>
+              </div>
+            </div>
+            <h4>在线沉淀协同口径</h4>
+            <p>在线沉淀技术文档，统一与产品、后端、测试的协同沟通上下文。</p>
+          </article>
+        </div>
       </div>
       <div class="quote">核心目标：在正式开发前完成需求收敛与技术澄清，把后置返工变成前置发现。</div>
     </section>
@@ -1144,12 +2038,11 @@
       </div>
       <div class="flow" aria-label="AI 辅助设计稿还原流程">
         <article class="flow-card"><span class="tag">01</span><h3>输入设计稿</h3><p>批量读取 Figma 节点、页面信息、样式信息和资源信息。</p></article>
-        <article class="flow-card"><span class="tag">02</span><h3>设计稿解析</h3><p>解析节点结构，补齐设计稿原始层级中不稳定的结构信息。</p></article>
-        <article class="flow-card"><span class="tag">03</span><h3>结构分析与优化</h3><p>层级分析、冗余节点识别、结构压缩、节点重组、无效节点剔除。</p></article>
-        <article class="flow-card"><span class="tag">04</span><h3>组件识别与映射</h3><p>识别团队私有组件，完成可扩展组件匹配与置信度评估。</p></article>
-        <article class="flow-card"><span class="tag">05</span><h3>样式转换与标准化</h3><p>样式合并优化、响应式转换、单位规范、类型与规范校验。</p></article>
-        <article class="flow-card"><span class="tag">06</span><h3>代码生成</h3><p>生成结构代码、样式代码、组件化输出、代码优化。</p></article>
-        <article class="flow-card"><span class="tag">07</span><h3>结果输出</h3><p>输出可直接使用的前端代码、组件代码、样式文件与代码片段。</p></article>
+        <article class="flow-card"><span class="tag">02</span><h3>解析与结构优化</h3><p>解析节点结构，补齐层级信息，并完成冗余识别、结构压缩与节点重组。</p></article>
+        <article class="flow-card"><span class="tag">03</span><h3>组件识别与映射</h3><p>识别团队私有组件，完成可扩展组件匹配与置信度评估。</p></article>
+        <article class="flow-card"><span class="tag">04</span><h3>样式转换与标准化</h3><p>样式合并优化、响应式转换、单位规范、类型与规范校验。</p></article>
+        <article class="flow-card"><span class="tag">05</span><h3>代码生成</h3><p>生成结构代码、样式代码、组件化输出、代码优化。</p></article>
+        <article class="flow-card"><span class="tag">06</span><h3>结果输出</h3><p>输出可直接使用的前端代码、组件代码、样式文件与代码片段。</p></article>
       </div>
       <div class="grid-2" style="margin-top:18px">
         <article class="card accent-green">
@@ -1163,6 +2056,7 @@
         <article class="card accent-blue">
           <h3>带来的价值</h3>
           <ul class="mini-list">
+            <li>无需增加ui工作量。</li>
             <li>提升还原效率，减少手动还原时间。</li>
             <li>提高还原质量，降低后续样式修复成本。</li>
             <li>提升组件复用，降低开发成本并缩短交付周期。</li>
@@ -1194,7 +2088,8 @@
       </div>
       <div class="problem-grid">
         <article class="problem">
-          <h3>1. 写不对：需求理解偏差</h3>
+          <h3>1. 写不对：需求理解</h3>
+          <p class="problem-note">早期尝试 OpenSpec、Superpower 等方案，但是生成文档量太大，难以阅读，细节也难以覆盖到。</p>
           <ul class="mini-list">
             <li>业务逻辑理解偏差</li>
             <li>状态流转错误</li>
@@ -1211,17 +2106,15 @@
         <article class="problem">
           <h3>2. 写不好：质量与规范问题</h3>
           <ul class="mini-list">
+            <li>不理解业务，容易生成脱离真实场景的实现</li>
             <li>代码风格不统一</li>
             <li>重复实现严重</li>
             <li>结构不合理</li>
             <li>可维护性差</li>
           </ul>
           <div class="solution-row">
-            <div class="solution">统一代码风格</div>
-            <div class="solution">统一目录结构</div>
-            <div class="solution">统一状态管理</div>
-            <div class="solution">统一组件规范</div>
-            <div class="solution">统一请求封装</div>
+            <div class="solution">规范文档</div>
+            <div class="solution">业务文档</div>
           </div>
         </article>
         <article class="problem">
@@ -1241,6 +2134,36 @@
           </div>
         </article>
       </div>
+      <div class="concept-grid" aria-label="代码生成关键策略说明">
+        <div class="glue-explain">
+          <b>什么是胶水编程</b>
+          <p>不让 AI 重新造一套系统，而是优先复用已有 SDK、组件、接口和工具函数，只生成少量“连接代码”完成组合、调用、封装和适配。</p>
+          <div class="glue-diagram" aria-label="胶水编程示意图">
+            <div class="glue-stack">
+              <div class="glue-chip">已有组件</div>
+              <div class="glue-chip">SDK / 接口</div>
+              <div class="glue-chip">工具函数</div>
+            </div>
+            <div class="glue-bridge">胶水<br>代码</div>
+            <div class="glue-result">业务页面<br>与流程</div>
+          </div>
+        </div>
+        <div class="blueprint-explain">
+          <b>生成蓝图的作用</b>
+          <p>开发完成后，把代码实现反向整理成可检查的细节视图，例如字段从哪里来、Action 如何流转，帮助开发者确认实现是否符合预期。</p>
+          <div class="blueprint-diagram" aria-label="生成蓝图示意图">
+            <div class="blue-node">代码实现</div>
+            <div class="blue-arrow">→</div>
+            <div class="blue-stack">
+              <div class="blue-node">字段溯源</div>
+              <div class="blue-node">Action 流向</div>
+              <div class="blue-node">架构关系</div>
+            </div>
+            <div class="blue-arrow">→</div>
+            <div class="blue-check">确认实现<br>符合预期</div>
+          </div>
+        </div>
+      </div>
       <details class="source">
         <summary>查看原始 PDF 图片来源：AI 辅助代码生成整体解决方案</summary>
         <img src="assets/page-05-image-01-X149.png" alt="AI 辅助代码生成整体解决方案流程图原始截图">
@@ -1250,10 +2173,10 @@
     <section id="debug" class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">05 / Debug Collaboration</div>
-          <h2>联调自测：从人工排查转向 AI 辅助定位</h2>
+          <div class="kicker">05 / Debug & Self-Test</div>
+          <h2>联调自测：当前用于生成测试用例，后续探索问题定位</h2>
         </div>
-        <p class="section-copy">联调阶段最耗时的不是开发本身，而是问题定位、多方沟通、反复确认与修复。AI 适合处理日志、数据比对、错误归因和上下文关联。</p>
+        <p class="section-copy">联调阶段最耗时的不是开发本身，而是问题定位、多方沟通、反复确认与修复。目前已使用 AI 生成测试用例用于自测，日志分析和问题定位仍处于探索方向。</p>
       </div>
       <div class="grid-2">
         <article class="card accent-orange">
@@ -1266,15 +2189,43 @@
           </ul>
         </article>
         <article class="card accent-green">
-          <h3>未来探索方向</h3>
+          <h3>当前已使用</h3>
+          <ul class="mini-list">
+            <li>结合需求和页面逻辑，生成自测测试用例。</li>
+            <li>覆盖主流程、边界场景、异常流程和关键状态切换。</li>
+            <li>帮助开发在提测前完成更系统的自检。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="checklist" style="margin-top:18px">
+        <div class="check"><b>接口异常分析</b><span>分析请求参数、返回结果、字段差异和状态码异常，辅助判断问题归属。</span></div>
+        <div class="check"><b>日志与错误聚合</b><span>汇总 Console 日志、Network 请求和服务端日志，形成问题摘要。</span></div>
+        <div class="check"><b>问题归因辅助</b><span>辅助判断是前端、后端、配置还是环境问题，减少反复沟通。</span></div>
+        <div class="check"><b>数据差异比对</b><span>对比接口字段、页面状态和预期数据结构，快速发现不一致。</span></div>
+        <div class="check"><b>复现路径整理</b><span>根据操作步骤、日志和页面状态，整理可复现的问题路径。</span></div>
+        <div class="check"><b>修复建议生成</b><span>基于错误类型和上下文，给出可能的修复方向与排查顺序。</span></div>
+        <div class="check"><b>自测用例补全</b><span>根据遗漏场景和联调问题，补充后续自测用例。</span></div>
+        <div class="check"><b>协同结论沉淀</b><span>把问题原因、处理方式和协同口径沉淀到技术文档中。</span></div>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card accent-blue">
+          <h3>后续探索方向</h3>
           <ul class="mini-list">
             <li>接口异常分析：请求参数、返回结果、字段差异、状态码异常。</li>
             <li>日志与错误聚合：Console、Network、服务端日志形成问题摘要。</li>
             <li>问题归因辅助：判断前端、后端、配置或环境问题。</li>
           </ul>
         </article>
+        <article class="card accent-violet">
+          <h3>阶段定位</h3>
+          <ul class="mini-list">
+            <li>当前重点是提升开发自测覆盖率。</li>
+            <li>问题定位能力需要接入更多日志、接口和环境上下文。</li>
+            <li>稳定后再逐步进入联调问题自动分析流程。</li>
+          </ul>
+        </article>
       </div>
-      <div class="quote">目标：减少重复沟通与低效排查，让研发更快聚焦真正的问题修复。</div>
+      <div class="quote">当前定位：已落地生成测试用例辅助自测，后续再探索日志分析、异常归因和联调问题定位。</div>
     </section>
 
     <section id="review" class="shell reveal">
@@ -1286,7 +2237,7 @@
         <p class="section-copy">传统 CR 受 Reviewer 精力、上下文完整度和全局影响分析能力限制。AI CR 平台的目标是在上线前识别更深层风险。</p>
       </div>
       <div class="flow" aria-label="AI 辅助代码 Review 流程">
-        <article class="flow-card"><span class="tag">01</span><h3>代码提交</h3><p>开发提交 PR/MR，触发 CR 流程。</p></article>
+        <article class="flow-card"><span class="tag">01</span><h3>代码提交</h3><p>跟机器人对话，触发 CR 流程。</p></article>
         <article class="flow-card"><span class="tag">02</span><h3>AI 预分析</h3><p>识别变更范围，生成初步分析报告。</p></article>
         <article class="flow-card"><span class="tag">03</span><h3>人工 Review</h3><p>Reviewer 查看 AI 报告，结合代码进行 Review。</p></article>
         <article class="flow-card"><span class="tag">04</span><h3>问题确认与处理</h3><p>确认问题，提出修复建议，标记误报或忽略说明。</p></article>
@@ -1320,29 +2271,29 @@
     <section id="test" class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">07 / Test Checklist</div>
-          <h2>测试阶段：自动生成基于上下文的自测 Checklist</h2>
+          <div class="kicker">07 / Test Exploration</div>
+          <h2>测试阶段：探索 AI 辅助自动化测试</h2>
         </div>
-        <p class="section-copy">很多问题不是不会测，而是边界场景、异常流程、状态覆盖和回归范围容易遗漏。AI 可以把“凭经验自测”升级为“系统化检查”。</p>
+        <p class="section-copy">这一阶段目前还在探索自动化测试方向，尚未真正开始在流程中使用。当前重点是判断 AI 能在哪些测试工作上形成稳定收益。</p>
       </div>
       <div class="checklist">
-        <div class="check"><b>主流程检查</b><span>确保核心业务路径完整可用。</span></div>
-        <div class="check"><b>边界场景</b><span>覆盖极值、空值、缺省和边缘状态。</span></div>
-        <div class="check"><b>异常流程</b><span>覆盖接口异常、状态异常和重试逻辑。</span></div>
-        <div class="check"><b>权限校验</b><span>覆盖角色、可见性和操作权限。</span></div>
-        <div class="check"><b>状态切换</b><span>检查多状态流转和 UI 反馈。</span></div>
-        <div class="check"><b>接口异常</b><span>检查失败、超时、字段缺失和格式变化。</span></div>
-        <div class="check"><b>空数据场景</b><span>检查空态、加载态和兜底文案。</span></div>
-        <div class="check"><b>回归影响范围</b><span>结合变更识别需要回归的页面和模块。</span></div>
+        <div class="check"><b>用例生成</b><span>基于需求、技术方案和页面逻辑，辅助生成主流程、边界场景和异常流程用例。</span></div>
+        <div class="check"><b>自动化脚本生成</b><span>探索生成 Playwright 等端到端测试脚本，降低用例转脚本的人工成本。</span></div>
+        <div class="check"><b>回归范围识别</b><span>结合代码变更、页面调用关系和接口影响，判断哪些页面与流程需要回归。</span></div>
+        <div class="check"><b>测试数据准备</b><span>辅助整理正常、异常、空数据、权限差异等测试数据组合。</span></div>
+        <div class="check"><b>执行结果分析</b><span>自动汇总失败截图、控制台日志和网络请求，辅助判断失败原因。</span></div>
+        <div class="check"><b>缺陷定位辅助</b><span>结合失败步骤、接口返回和页面状态，辅助判断前端、后端或环境问题。</span></div>
+        <div class="check"><b>覆盖率评估</b><span>对照需求点和风险点，识别仍未覆盖的场景与测试空洞。</span></div>
+        <div class="check"><b>报告沉淀</b><span>将测试结果、失败原因和修复经验沉淀为后续回归与知识库素材。</span></div>
       </div>
-      <div class="quote">最终实现：减少遗漏问题、提升自测覆盖率、降低低级 Bug、缩短测试沟通成本。</div>
+      <div class="quote">当前定位：先探索 AI 在自动化测试链路中的可行能力，验证稳定后再进入正式使用流程。</div>
     </section>
 
     <section id="ops" class="shell reveal">
       <div class="section-head">
         <div>
           <div class="kicker">08 / After Release</div>
-          <h2>发布后：AI 助力线上运营、巡检与知识沉淀</h2>
+          <h2>开发后：AI 助力线上运营、巡检与知识沉淀</h2>
         </div>
         <p class="section-copy">发布之后研发工作并没有结束。线上阶段更关注风险发现、问题定位、经验沉淀与长期可维护性。</p>
       </div>
