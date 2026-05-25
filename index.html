@@ -539,6 +539,41 @@
       font-size: 14px;
     }
 
+    .achieved-metric {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+      margin-top: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #052e16;
+      background: rgba(134, 239, 172, .92);
+      border: 1px solid rgba(34, 197, 94, .45);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .achieved-metric span {
+      color: #166534;
+      font-weight: 800;
+    }
+
+    .achieved-metric b {
+      color: #022c22;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-size: 13px;
+    }
+
+    .section-achieved {
+      margin: -4px 0 16px;
+    }
+
+    .section-copy .achieved-metric {
+      margin-top: 12px;
+    }
+
     .stage-values {
       margin-top: 14px;
       padding-top: 12px;
@@ -577,6 +612,175 @@
       background: var(--stage-accent);
       box-shadow: 0 0 12px var(--stage-accent);
       flex: 0 0 auto;
+    }
+
+    .baseline-map {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .baseline-card {
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, .54);
+    }
+
+    .baseline-card h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .baseline-time {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 12px;
+      color: #86efac;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-weight: 900;
+    }
+
+    .baseline-time b {
+      color: inherit;
+      font-size: 22px;
+    }
+
+    .baseline-time span {
+      color: var(--soft);
+      font-size: 12px;
+      font-family: "Fira Sans", "PingFang SC", sans-serif;
+      font-weight: 800;
+    }
+
+    .baseline-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .baseline-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid rgba(148, 163, 184, .14);
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .baseline-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .baseline-list em {
+      flex: 0 0 auto;
+      color: #fbbf24;
+      font-style: normal;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .evidence-card {
+      min-height: 124px;
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, .54);
+    }
+
+    .evidence-card b {
+      display: block;
+      margin-bottom: 6px;
+      color: #86efac;
+      font-family: "Fira Code", ui-monospace, monospace;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .evidence-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .evidence-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .focus-map {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .focus-card {
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, .54);
+      box-shadow: inset 0 4px 0 var(--focus-accent, var(--blue));
+    }
+
+    .focus-card h3 {
+      margin: 12px 0 8px;
+      color: var(--text);
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .focus-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .focus-card .achieved-metric {
+      margin-top: 12px;
+    }
+
+    .focus-card .stage-values {
+      margin-top: auto;
+    }
+
+    .map-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 10px;
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .map-label b {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .map-label span {
+      color: var(--muted);
     }
 
     .value-row {
@@ -1004,6 +1208,36 @@
       font-weight: 700;
     }
 
+    .doc-solution-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .doc-solution {
+      min-height: 118px;
+      justify-items: start;
+      align-content: center;
+      text-align: left;
+      padding: 16px;
+    }
+
+    .doc-solution b,
+    .doc-solution span {
+      display: block;
+    }
+
+    .doc-solution b {
+      margin-bottom: 8px;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .doc-solution span {
+      color: #475569;
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
     .timeline {
       position: relative;
       display: grid;
@@ -1076,6 +1310,15 @@
       display: block;
       margin-bottom: 5px;
       color: var(--text);
+    }
+
+    #future .checklist {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    #future .check {
+      grid-column: span 2;
+      min-height: 128px;
     }
 
     .check span {
@@ -1308,6 +1551,7 @@
       .hero-grid,
       .grid-2,
       .grid-3,
+      .baseline-map,
       .problem-grid {
         grid-template-columns: 1fr;
       }
@@ -1335,6 +1579,10 @@
 
       .solution-row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .doc-solution-row {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
       }
 
       .concept-grid {
@@ -1380,15 +1628,29 @@
       .metrics,
       .value-row,
       .checklist,
+      .evidence-grid,
+      .focus-map,
       .loop,
       .phase-group.pre .phase-steps,
       .phase-group.dev .phase-steps,
       .phase-group.ops .phase-steps {
         grid-template-columns: 1fr;
       }
+      #future .checklist {
+        grid-template-columns: 1fr;
+      }
+      #future .check,
+      #future .check:nth-child(4),
+      #future .check:nth-child(5),
+      #future .check:nth-child(6) {
+        grid-column: auto;
+      }
       .phase-head { display: block; }
       .phase-meta { display: block; margin-top: 4px; }
+      .map-label { display: block; }
+      .map-label span { display: block; margin-top: 4px; }
       .solution-row { grid-template-columns: 1fr; }
+      .doc-solution-row { grid-template-columns: 1fr; }
       .detail-steps { grid-template-columns: 1fr; }
       section { padding: 54px 0; }
     }
@@ -1530,6 +1792,26 @@
     background: #eff6ff;
   }
 
+  .theme-variant-consulting .doc-solution-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-variant-consulting .doc-solution {
+    min-height: 118px;
+    justify-items: start;
+    align-content: center;
+    text-align: left;
+    border-left-width: 6px;
+  }
+
+  .theme-variant-consulting .doc-solution b {
+    color: #0f172a;
+  }
+
+  .theme-variant-consulting .doc-solution span {
+    color: #475569;
+  }
+
   .theme-variant-consulting .problem:nth-child(3) .solution {
     border-left-color: #15803d;
     background: #f0fdf4;
@@ -1547,6 +1829,70 @@
 
   .theme-variant-consulting .check span {
     color: #334155;
+  }
+
+  .theme-variant-consulting .baseline-card {
+    background: #ffffff;
+    border-color: #cfd6df;
+    box-shadow: none;
+  }
+
+  .theme-variant-consulting .baseline-card h3 {
+    color: #0f172a;
+  }
+
+  .theme-variant-consulting .baseline-time {
+    color: #c2410c;
+  }
+
+  .theme-variant-consulting .baseline-time span,
+  .theme-variant-consulting .baseline-list li,
+  .theme-variant-consulting .map-label span {
+    color: #475569;
+  }
+
+  .theme-variant-consulting .baseline-list li {
+    border-bottom-color: #e5e7eb;
+  }
+
+  .theme-variant-consulting .baseline-list em {
+    color: #1d4ed8;
+  }
+
+  .theme-variant-consulting .evidence-card {
+    background: #ffffff;
+    border-color: #cfd6df;
+    box-shadow: none;
+  }
+
+  .theme-variant-consulting .evidence-card b {
+    color: #1d4ed8;
+  }
+
+  .theme-variant-consulting .evidence-card strong {
+    color: #0f172a;
+  }
+
+  .theme-variant-consulting .evidence-card span {
+    color: #475569;
+  }
+
+  .theme-variant-consulting .focus-card {
+    background: #ffffff;
+    border-color: #cfd6df;
+    box-shadow: inset 0 4px 0 var(--focus-accent, #1d4ed8);
+  }
+
+  .theme-variant-consulting .focus-card h3 {
+    color: #0f172a;
+  }
+
+  .theme-variant-consulting .focus-card p {
+    color: #475569;
+  }
+
+  .theme-variant-consulting .map-label b {
+    color: #0f172a;
   }
 
   .theme-variant-consulting #overview .section-head {
@@ -1651,6 +1997,13 @@
     line-height: 1.55;
   }
 
+  .theme-variant-consulting #overview .achieved-metric {
+    margin-top: 6px;
+    background: #ecfdf5;
+    border-color: #86efac;
+    color: #065f46;
+  }
+
   .theme-variant-consulting #overview .stage-values {
     margin-top: 10px;
     padding-top: 9px;
@@ -1687,7 +2040,7 @@
   }
 
   .theme-variant-consulting #overview .value-row {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin-top: 12px;
   }
 
@@ -1821,6 +2174,9 @@
     .theme-variant-consulting #overview .value {
       min-width: 0;
     }
+    .theme-variant-consulting .doc-solution-row {
+      grid-template-columns: 1fr;
+    }
   }
 
 </style>
@@ -1835,13 +2191,11 @@
     </a>
     <div class="nav-links">
       <a href="#overview">全景</a>
-      <a href="#before">开发前</a>
       <a href="#d2c">设计稿还原</a>
       <a href="#coding">代码生成</a>
-      <a href="#debug">联调自测</a>
       <a href="#review">代码 Review</a>
-      <a href="#test">测试</a>
       <a href="#ops">运维闭环</a>
+      <a href="#future">未来计划</a>
     </div>
   </nav>
 
@@ -1851,7 +2205,7 @@
         <div>
           <div class="eyebrow"><span class="pulse"></span> 咨询报告风 · 前端研发全生命周期</div>
           <h1>AI 提效在<span class="grad">前端研发全流程</span>中的探索</h1>
-          <p class="lead">从需求理解、方案设计、代码生成、联调自测、代码 Review 到发布后巡检，AI 的价值不只是“帮忙写代码”，而是把重复沟通、经验判断和上下文整理变成可沉淀、可反馈、可进化的工程能力。</p>
+          <p class="lead">当前重点聚焦 4 个方向：设计稿还原、代码生成、代码 Review 和开发后运维闭环。AI 的价值不是铺满所有环节，而是先在高频、可度量、能沉淀的场景里形成稳定收益。</p>
           <div class="hero-actions">
             <a class="btn primary" href="#overview">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
@@ -1869,10 +2223,10 @@
             <span>impact.summary</span>
           </div>
           <div class="metrics">
-            <div class="metric"><b>50%</b><span>UI 还原部分开发效率提升</span></div>
             <div class="metric"><b>30%-40%</b><span>整体效率与交付周期优化空间</span></div>
-            <div class="metric"><b>40%-50%</b><span>协同沟通时间降低的目标区间</span></div>
-            <div class="metric"><b>12</b><span>覆盖前端全流程的 AI 能力点</span></div>
+            <div class="metric"><b>4</b><span>当前重点推进方向</span></div>
+            <div class="metric"><b>40%-50%</b><span>代码质量与上线风险改善目标</span></div>
+            <div class="metric"><b>50%-70%</b><span>问题定位与排查时间缩短空间</span></div>
           </div>
         </aside>
       </div>
@@ -1882,59 +2236,82 @@
       <div class="section-head">
         <div>
           <div class="kicker">01 / Full Process</div>
-          <h2>一张图看清 AI 如何贯穿前端研发流程</h2>
+          <h2>一张图看清当前 4 个 AI 提效重点方向</h2>
         </div>
-        <p class="section-copy">原 PDF 首图被转译为可横向浏览的 HTML 全景地图：开发前降低理解成本，开发中提升生成与协同效率，开发后沉淀经验并形成反馈闭环。</p>
+        <p class="section-copy">报告主线收敛为已经在推进或已有成果的方向：设计稿还原、代码生成、代码 Review 和运维闭环；其它能力放入未来计划逐步验证。</p>
+      </div>
+      <div class="map-label">
+        <b>传统流程耗时基线（未引入 AI）</b>
+        <span>以下为报告口径估算，可替换为团队真实统计数据</span>
+      </div>
+      <div class="baseline-map" aria-label="未引入 AI 的传统前端研发流程耗时基线">
+        <article class="baseline-card">
+          <h3>开发前：需求与方案</h3>
+          <div class="baseline-time"><b>0.5-1d</b><span>典型准备耗时</span></div>
+          <ul class="baseline-list">
+            <li>需求评审与理解偏差确认 <em>0.5d</em></li>
+            <li>风险点识别与方案沟通 <em>0.5d</em></li>
+          </ul>
+        </article>
+        <article class="baseline-card">
+          <h3>开发中：实现与协同</h3>
+          <div class="baseline-time"><b>4-8d</b><span>主要交付耗时</span></div>
+          <ul class="baseline-list">
+            <li>设计稿还原与样式调整 <em>1-2d</em></li>
+            <li>业务代码实现与联调自测 <em>2-4d</em></li>
+            <li>CR、测试与问题反复确认 <em>1-2d</em></li>
+          </ul>
+        </article>
+        <article class="baseline-card">
+          <h3>开发后：排查与沉淀</h3>
+          <div class="baseline-time"><b>0.5-2h/次</b><span>单问题定位耗时</span></div>
+          <ul class="baseline-list">
+            <li>日志、监控与链路人工排查 <em>30-120min</em></li>
+            <li>复盘文档与经验沉淀 <em>按需补充</em></li>
+          </ul>
+        </article>
+      </div>
+      <div class="map-label">
+        <b>当前重点方向</b>
+        <span>把需求澄清并入代码生成，把联调自测与自动化测试放入后续计划</span>
       </div>
       <div class="strip">
-        <div class="phase-map" aria-label="按三阶段分类的 AI 提效全流程">
-          <div class="phase-group pre" aria-labelledby="phase-pre">
-            <div class="phase-head">
-              <h3 id="phase-pre" class="phase-title">1. 开发前：需求阶段</h3>
-              <span class="phase-meta">Steps 01-02 · 需求收敛 / 决策前置</span>
-            </div>
-            <div class="phase-steps">
-              <article class="stage"><div class="stage-num">1</div><h3>需求分析与澄清</h3><p>自动分析需求、提炼核心信息、识别风险并持续澄清。</p><div class="stage-values"><b>价值</b><ul><li>提升需求分析效率</li><li>降低理解偏差</li><li>提前暴露风险</li></ul></div></article>
-              <article class="stage"><div class="stage-num">2</div><h3>自主判断可 AI 化</h3><p>判断任务是否可由 AI 自动完成，并生成执行方案。</p><div class="stage-values"><b>价值</b><ul><li>减少决策时间</li><li>提升任务拆解效率</li><li>降低人工投入</li></ul></div></article>
-            </div>
-          </div>
-
-          <div class="phase-group dev" aria-labelledby="phase-dev">
-            <div class="phase-head">
-              <h3 id="phase-dev" class="phase-title">2. 开发中：研发阶段</h3>
-              <span class="phase-meta">Steps 03-07 · 生成 / 联调自测 / CR / 测试</span>
-            </div>
-            <div class="phase-steps">
-              <article class="stage"><div class="stage-num">3</div><h3>设计稿还原</h3><p>解析设计稿，生成工程化、可复用的前端代码。</p><div class="stage-values"><b>价值</b><ul><li>提升还原效率</li><li>降低重复开发</li><li>提高还原质量</li></ul></div></article>
-              <article class="stage"><div class="stage-num">4</div><h3>代码生成</h3><p>基于需求与规范生成高质量、可维护代码。</p><div class="stage-values"><b>价值</b><ul><li>生成更准确的代码</li><li>符合工程规范</li><li>提高开发效率</li></ul></div></article>
-              <article class="stage"><div class="stage-num">5</div><h3>联调自测</h3><p>当前已用于生成测试用例辅助自测，后续可继续探索日志分析、问题定位和异常归因。</p><div class="stage-values"><b>价值</b><ul><li>提升自测覆盖率</li><li>减少沟通成本</li><li>缩短定位时间</li></ul></div></article>
-              <article class="stage"><div class="stage-num">6</div><h3>Code Review</h3><p>智能分析代码风险与影响，辅助 Review 决策。</p><div class="stage-values"><b>价值</b><ul><li>提前发现风险</li><li>降低线上事故率</li><li>提升代码质量</li></ul></div></article>
-              <article class="stage"><div class="stage-num">7</div><h3>测试</h3><p>正在探索自动化测试方向，重点验证 AI 在用例生成、回归辅助和执行分析中的价值。</p><div class="stage-values"><b>价值</b><ul><li>降低人工回归成本</li><li>减少漏测风险</li><li>提升测试效率</li></ul></div></article>
-            </div>
-          </div>
-
-          <div class="phase-group ops" aria-labelledby="phase-ops">
-            <div class="phase-head">
-              <h3 id="phase-ops" class="phase-title">3. 开发后：运维阶段</h3>
-              <span class="phase-meta">Steps 08-12 · 沉淀 / 巡检 / 分析 / 修复</span>
-            </div>
-            <div class="phase-steps">
-              <article class="stage"><div class="stage-num">8</div><h3>知识库沉淀</h3><p>沉淀文档与经验，构建团队知识资产。</p><div class="stage-values"><b>价值</b><ul><li>提升复用效率</li><li>沉淀团队经验</li><li>加速新人成长</li></ul></div></article>
-              <article class="stage"><div class="stage-num">9</div><h3>自动巡检</h3><p>基于发布与风险分析，自动巡检关键页面。</p><div class="stage-values"><b>价值</b><ul><li>替代人工回归</li><li>快速发现问题</li><li>降低遗漏概率</li></ul></div></article>
-              <article class="stage"><div class="stage-num">10</div><h3>智能监控</h3><p>智能监控异常、关联分析并快速发现问题。</p><div class="stage-values"><b>价值</b><ul><li>更快发现异常</li><li>减少排查时间</li><li>提升运维效率</li></ul></div></article>
-              <article class="stage"><div class="stage-num">11</div><h3>问题分析</h3><p>结合日志与链路分析，定位根因并提供修复建议。</p><div class="stage-values"><b>价值</b><ul><li>缩短定位时间</li><li>提升根因判断</li><li>降低故障影响</li></ul></div></article>
-              <article class="stage"><div class="stage-num">12</div><h3>自主修复</h3><p>自动执行修复方案，回滚或降低故障影响。</p><div class="stage-values"><b>价值</b><ul><li>减少人工干预</li><li>提升恢复速度</li><li>降低业务损失</li></ul></div></article>
-            </div>
-          </div>
+        <div class="focus-map" aria-label="当前 AI 提效重点方向">
+          <article class="focus-card" style="--focus-accent:#22c55e">
+            <div class="stage-num">1</div>
+            <h3>设计稿还原</h3>
+            <p>围绕 Figma 解析、结构重组、私有组件映射和工程规范落地，把设计稿转为可复用代码。</p>
+            <div class="achieved-metric"><span>现状</span><b>UI 还原提效 50%</b></div>
+            <div class="stage-values"><b>重点</b><ul><li>空间化重组</li><li>组件识别</li><li>样式标准化</li></ul></div>
+          </article>
+          <article class="focus-card" style="--focus-accent:#14b8a6">
+            <div class="stage-num">2</div>
+            <h3>代码生成</h3>
+            <p>把需求澄清作为代码生成前置环节，通过对话收敛需求，再结合规范、蓝图和知识库生成代码。</p>
+            <div class="achieved-metric"><span>现状</span><b>提效 20%-50%</b></div>
+            <div class="stage-values"><b>重点</b><ul><li>需求澄清</li><li>胶水编程</li><li>生成蓝图</li></ul></div>
+          </article>
+          <article class="focus-card" style="--focus-accent:#fbbf24">
+            <div class="stage-num">3</div>
+            <h3>Code Review</h3>
+            <p>基于 diff 做增量分析和影响判断，辅助 Reviewer 更快识别风险并沉淀反馈。</p>
+            <div class="achieved-metric"><b>20→5min / 采纳率 65%</b></div>
+            <div class="stage-values"><b>重点</b><ul><li>风险识别</li><li>影响分析</li><li>反馈回流</li></ul></div>
+          </article>
+          <article class="focus-card" style="--focus-accent:#8b5cf6">
+            <div class="stage-num">4</div>
+            <h3>运维闭环</h3>
+            <p>围绕报障、分发、分析、跟进、复盘和知识沉淀，把开发后问题处理做成闭环。</p>
+            <div class="achieved-metric"><span>测算</span><b>32-38h/月</b></div>
+            <div class="stage-values"><b>重点</b><ul><li>问题闭环</li><li>自动巡检</li><li>知识联动</li></ul></div>
+          </article>
         </div>
       </div>
       <div class="value-row">
-        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 3 5-7"/><path d="M17 7h2v2"/></svg></div><div><b>效率提升</b><span>30%-40%</span></div></div>
-        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7z"/><path d="m9 12 2 2 4-5"/></svg></div><div><b>代码质量提升</b><span>20%-40%</span></div></div>
-        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M16 21a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 11v2a4 4 0 0 0 4 4h0"/><path d="M16 13v-2a4 4 0 0 0-4-4h0"/></svg></div><div><b>协同沟通时间降低</b><span>40%-50%</span></div></div>
-        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 7l9 14 9-14z"/><path d="M12 8v5"/><path d="M12 17h.01"/></svg></div><div><b>上线风险降低</b><span>20%-40%</span></div></div>
-        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M11 7v4l3 2"/></svg></div><div><b>定位时间缩短</b><span>50%-70%</span></div></div>
-        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M6 7h9a4 4 0 0 1 0 8H6"/><path d="M6 11h10"/></svg></div><div><b>运维成本降低</b><span>30%-40%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 3 5-7"/><path d="M17 7h2v2"/></svg></div><div><b>设计稿还原</b><span>50%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7z"/><path d="m9 12 2 2 4-5"/></svg></div><div><b>代码生成</b><span>20%-50%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M16 21a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 11v2a4 4 0 0 0 4 4h0"/><path d="M16 13v-2a4 4 0 0 0-4-4h0"/></svg></div><div><b>Code Review</b><span>20→5min / 65%</span></div></div>
+        <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M11 7v4l3 2"/></svg></div><div><b>运维闭环</b><span>32-38h/月</span></div></div>
       </div>
       <details class="source">
         <summary>查看原始 PDF 图片来源：全景图</summary>
@@ -1942,7 +2319,7 @@
       </details>
     </section>
 
-    <section id="before" class="shell reveal">
+    <section id="before" class="shell reveal" hidden>
       <div class="section-head">
         <div>
           <div class="kicker">02 / Before Coding</div>
@@ -2031,10 +2408,10 @@
     <section id="d2c" class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">03 / Design To Code</div>
-          <h2>开发中：AI 辅助设计稿还原与代码生成</h2>
+          <div class="kicker">02 / Design To Code</div>
+          <h2>AI 辅助设计稿还原与代码生成</h2>
         </div>
-        <p class="section-copy">通用 Figma 转代码常常“能运行，但无法真正进入业务工程体系”。这里的关键是空间化重组、私有组件识别、工程规范落地与持续优化。</p>
+        <p class="section-copy">通用 Figma 转代码常常“能运行，但无法真正进入业务工程体系”。这里的关键是空间化重组、私有组件识别、工程规范落地与持续优化。<br><span class="achieved-metric"><span>现状</span><b>UI 还原提效 50%</b></span></p>
       </div>
       <div class="flow" aria-label="AI 辅助设计稿还原流程">
         <article class="flow-card"><span class="tag">01</span><h3>输入设计稿</h3><p>批量读取 Figma 节点、页面信息、样式信息和资源信息。</p></article>
@@ -2072,19 +2449,20 @@
     <section id="coding" class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">04 / Coding Strategy</div>
+          <div class="kicker">03 / Coding Strategy</div>
           <h2>代码生成：解决写不对、写不好、写不了</h2>
         </div>
-        <p class="section-copy">代码生成不是把需求丢给 AI 就结束，而是用澄清、拆分、胶水编程、蓝图和知识库共同约束它，让结果真正可落地。</p>
+        <p class="section-copy">代码生成不是把需求丢给 AI 就结束，而是先把需求澄清前置，再用拆分、胶水编程、蓝图和知识库共同约束它，让结果真正可落地。<br><span class="achieved-metric"><span>现状</span><b>代码生成提效 20%-50%</b></span></p>
       </div>
+      <div class="quote">结构调整：开发前的需求分析、持续澄清和规范化沉淀不再作为独立主线，而是并入代码生成的前置环节，用来解决“写不对”的问题。</div>
       <div class="flow" aria-label="AI 辅助代码生成整体方案流程">
-        <article class="flow-card"><span class="tag">Input</span><h3>需求输入</h3><p>用户提出业务需求，进入对话式澄清。</p></article>
-        <article class="flow-card"><span class="tag">Clarify</span><h3>需求澄清前置</h3><p>通过一问一答收敛问题，降低理解偏差。</p></article>
+        <article class="flow-card"><span class="tag">Parse</span><h3>需求预解析</h3><p>自动读取需求文档，提炼核心需求、功能模块、字段口径和风险点。</p></article>
+        <article class="flow-card"><span class="tag">PRD</span><h3>规范化 PRD</h3><p>生成符合开发理解的结构化 PRD，包含目标、范围、流程、边界和待确认项。</p></article>
+        <article class="flow-card"><span class="tag">Clarify</span><h3>对话澄清</h3><p>围绕待确认项一问一答，收敛业务规则、状态流转和异常场景。</p></article>
         <article class="flow-card"><span class="tag">Split</span><h3>架构拆分</h3><p>拆分模块、组件和数据流，降低单次生成复杂度。</p></article>
         <article class="flow-card"><span class="tag">Glue</span><h3>胶水编程策略</h3><p>优先复用已有模块，用最少胶水代码组合、封装和适配。</p></article>
         <article class="flow-card"><span class="tag">Code</span><h3>生成代码</h3><p>基于澄清后的需求和架构生成工程代码。</p></article>
         <article class="flow-card"><span class="tag">Map</span><h3>生成蓝图</h3><p>生成架构图、数据流、字段溯源，校验 AI 理解是否符合预期。</p></article>
-        <article class="flow-card"><span class="tag">Land</span><h3>输出与落地</h3><p>产出高质量代码并集成到项目中。</p></article>
       </div>
       <div class="problem-grid">
         <article class="problem">
@@ -2097,10 +2475,10 @@
             <li>边界场景遗漏</li>
           </ul>
           <div class="solution-row">
-            <div class="solution">需求澄清前置</div>
+            <div class="solution">需求预解析</div>
+            <div class="solution">规范化 PRD</div>
+            <div class="solution">对话澄清</div>
             <div class="solution">架构拆分</div>
-            <div class="solution">胶水编程</div>
-            <div class="solution">生成蓝图</div>
           </div>
         </article>
         <article class="problem">
@@ -2112,9 +2490,9 @@
             <li>结构不合理</li>
             <li>可维护性差</li>
           </ul>
-          <div class="solution-row">
-            <div class="solution">规范文档</div>
-            <div class="solution">业务文档</div>
+          <div class="solution-row doc-solution-row">
+            <div class="solution doc-solution"><b>规范文档</b><span>统一代码风格、目录结构、状态管理和请求封装方式。</span></div>
+            <div class="solution doc-solution"><b>业务文档</b><span>补齐场景规则、字段口径、边界条件和历史实现背景。</span></div>
           </div>
         </article>
         <article class="problem">
@@ -2170,7 +2548,7 @@
       </details>
     </section>
 
-    <section id="debug" class="shell reveal">
+    <section id="debug" class="shell reveal" hidden>
       <div class="section-head">
         <div>
           <div class="kicker">05 / Debug & Self-Test</div>
@@ -2231,10 +2609,10 @@
     <section id="review" class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">06 / Code Review</div>
+          <div class="kicker">04 / Code Review</div>
           <h2>CR 阶段：让 Review 从看代码升级为风险分析</h2>
         </div>
-        <p class="section-copy">传统 CR 受 Reviewer 精力、上下文完整度和全局影响分析能力限制。AI CR 平台的目标是在上线前识别更深层风险。</p>
+        <p class="section-copy">传统 CR 受 Reviewer 精力、上下文完整度和全局影响分析能力限制。AI CR 平台的目标是在上线前识别更深层风险。<br><span class="achieved-metric"><span>现状</span><b>耗时 20min→5min</b></span> <span class="achieved-metric"><span>采纳率</span><b>65%</b></span></p>
       </div>
       <div class="flow" aria-label="AI 辅助代码 Review 流程">
         <article class="flow-card"><span class="tag">01</span><h3>代码提交</h3><p>跟机器人对话，触发 CR 流程。</p></article>
@@ -2242,7 +2620,7 @@
         <article class="flow-card"><span class="tag">03</span><h3>人工 Review</h3><p>Reviewer 查看 AI 报告，结合代码进行 Review。</p></article>
         <article class="flow-card"><span class="tag">04</span><h3>问题确认与处理</h3><p>确认问题，提出修复建议，标记误报或忽略说明。</p></article>
         <article class="flow-card"><span class="tag">05</span><h3>结果汇总</h3><p>生成 CR 结论、风险等级与评价。</p></article>
-        <article class="flow-card"><span class="tag">06</span><h3>上线决策</h3><p>通过 CR 后合入主干，进入测试或发布流程。</p></article>
+        <article class="flow-card"><span class="tag">06</span><h3>评审结论流转</h3><p>输出通过、需修改或需人工确认的结论，进入后续开发处理或测试准备。</p></article>
       </div>
       <div class="grid-2" style="margin-top:18px">
         <article class="card accent-blue">
@@ -2254,11 +2632,11 @@
           </ul>
         </article>
         <article class="card accent-orange">
-          <h3>未来方向：上线风险分析</h3>
+          <h3>未来方向：发布前风险分析</h3>
           <ul class="mini-list">
             <li>结合技术文档与架构设计理解业务背景。</li>
             <li>参考历史问题、风险案例和最佳实践。</li>
-            <li>从“最后一道质量卡”升级为完整上线风险评估。</li>
+            <li>从代码 Review 辅助升级为更完整的发布前风险评估。</li>
           </ul>
         </article>
       </div>
@@ -2268,7 +2646,7 @@
       </details>
     </section>
 
-    <section id="test" class="shell reveal">
+    <section id="test" class="shell reveal" hidden>
       <div class="section-head">
         <div>
           <div class="kicker">07 / Test Exploration</div>
@@ -2292,10 +2670,16 @@
     <section id="ops" class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">08 / After Release</div>
+          <div class="kicker">05 / After Release</div>
           <h2>开发后：AI 助力线上运营、巡检与知识沉淀</h2>
         </div>
-        <p class="section-copy">发布之后研发工作并没有结束。线上阶段更关注风险发现、问题定位、经验沉淀与长期可维护性。</p>
+        <p class="section-copy">发布之后研发工作并没有结束。线上阶段更关注报障闭环、问题定位、自动巡检、经验沉淀与长期可维护性。飞书 OpenClaw 方案里的测算主要可以支撑这一阶段。</p>
+      </div>
+      <div class="evidence-grid" aria-label="飞书 OpenClaw 开发后收益测算">
+        <div class="evidence-card"><b>32-38h/月</b><strong>总体节省工时</strong><span>按每月 40-70 个问题单、多人协作和飞书群协同测算。</span></div>
+        <div class="evidence-card"><b>14-15h/月</b><strong>问题闭环深化</strong><span>受理补字段、责任域判断、拉人建群、跟进催办与状态同步。</span></div>
+        <div class="evidence-card"><b>10-15h/月</b><strong>知识联动</strong><span>重复问题召回、FAQ 草稿、群内引用和新人接手效率提升。</span></div>
+        <div class="evidence-card"><b>8.75h/月</b><strong>发布后自动巡检</strong><span>发布后自动分析变更、定时检查日志异常并回写复盘状态。</span></div>
       </div>
       <div class="loop" aria-label="发布后 AI 闭环流程">
         <article class="loop-step"><b>知识库沉淀</b><span>沉淀新路由、新工具、新组件、新业务能力和历史问题案例。</span></article>
@@ -2313,24 +2697,44 @@
           </ul>
         </article>
         <article class="card accent-green">
-          <h3>最终目标</h3>
+          <h3>可追踪指标</h3>
           <ul class="mini-list">
-            <li>形成研发全流程的 AI 闭环能力。</li>
-            <li>风险自动发现，问题自动分析，经验自动沉淀。</li>
-            <li>部分问题自动修复，降低人工干预成本。</li>
+            <li>首次响应时间预计下降 30% 到 50%。</li>
+            <li>AI 解决问题占比提升到 40%+。</li>
+            <li>FAQ / 案例沉淀率预计提升到 80%+。</li>
+            <li>相似问题平均定位时间预计下降 20% 到 35%。</li>
           </ul>
         </article>
       </div>
+      <!-- <div class="quote">数据来源：/Users/qitmac001753/Downloads/feishu-openclaw.md，口径为中等规模团队、每月约 50 单问题的保守到中性测算。</div> -->
       <details class="source">
         <summary>查看原始 PDF 图片来源：发布后研发阶段流程</summary>
         <img src="assets/page-11-image-01-X247.png" alt="发布后研发阶段 AI 助力线上运营与持续进化流程图原始截图">
       </details>
     </section>
 
+    <section id="future" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">06 / Roadmap</div>
+          <h2>未来计划：从单点成果走向可度量闭环</h2>
+        </div>
+        <p class="section-copy">下一阶段重点不是简单扩大 AI 使用范围，而是让每个环节都有清晰边界、可验证指标和持续反馈机制。</p>
+      </div>
+      <div class="checklist">
+        <div class="check"><b>需求预分析与任务分流</b><span>在开发前判断哪些需求适合 AI 自主处理、哪些必须人工决策；可处理部分交给 AI 自动拆解、生成方案并推进执行。</span></div>
+        <div class="check"><b>提高设计稿还原度</b><span>继续优化 Figma 结构识别、私有组件映射、响应式还原和样式标准化，重点提升可直接落地的代码比例。</span></div>
+        <div class="check"><b>AI Coding 知识积累</b><span>沉淀业务规则、组件用法、SDK 示例、历史问题和最佳实践，提升知识命中率与生成结果的一次可用率。</span></div>
+        <div class="check"><b>联调自测能力扩展</b><span>在当前生成自测用例的基础上，后续探索接口异常分析、日志聚合、问题归因和协同结论沉淀。</span></div>
+        <div class="check"><b>自动化测试落地</b><span>从用例生成扩展到自动化脚本、回归范围识别、执行结果分析和测试报告沉淀，验证稳定后进入正式流程。</span></div>
+        <div class="check"><b>线上问题定位指标化</b><span>提升线上问题定位的使用率和准确率，重点跟踪 AI 解决问题占比、相似问题定位耗时、FAQ / 案例沉淀率和复盘覆盖率。</span></div>
+      </div>
+    </section>
+
     <section class="shell reveal">
       <div class="section-head">
         <div>
-          <div class="kicker">09 / Conclusion</div>
+          <div class="kicker">07 / Conclusion</div>
           <h2>结论：AI 提效的本质是工程能力升级</h2>
         </div>
         <p class="section-copy">AI 在前端领域的价值不是替代单点工作，而是把研发流程中的经验、上下文和反馈机制产品化。</p>
