@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -859,6 +859,60 @@
     .card.accent-orange { border-color: rgba(249, 115, 22, .38); }
     .card.accent-rose { border-color: rgba(251, 113, 133, .38); }
 
+    .showcase-card {
+      overflow: hidden;
+    }
+
+    .showcase-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, .18);
+      background: rgba(255, 255, 255, .96);
+    }
+
+    .showcase-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .demand-path {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .demand-step {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, .2);
+      background: rgba(255, 255, 255, .96);
+      color: #0f172a;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .demand-tip {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid #f97316;
+      border-radius: var(--radius);
+      background: #fff7ed;
+      color: #7c2d12;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
     .mini-list {
       display: grid;
       gap: 10px;
@@ -1188,7 +1242,7 @@
 
     .solution-row {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
       gap: 10px;
       margin-top: auto;
       padding-top: 16px;
@@ -1204,8 +1258,10 @@
       text-align: center;
       color: var(--soft);
       background: rgba(15, 23, 42, .68);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
+      line-height: 1.45;
+      word-break: break-word;
     }
 
     .doc-solution-row {
@@ -1319,6 +1375,10 @@
     #future .check {
       grid-column: span 2;
       min-height: 128px;
+    }
+
+    #future .check:nth-child(7) {
+      grid-column: span 6;
     }
 
     .check span {
@@ -1642,7 +1702,8 @@
       #future .check,
       #future .check:nth-child(4),
       #future .check:nth-child(5),
-      #future .check:nth-child(6) {
+      #future .check:nth-child(6),
+      #future .check:nth-child(7) {
         grid-column: auto;
       }
       .phase-head { display: block; }
@@ -2044,6 +2105,14 @@
     margin-top: 12px;
   }
 
+  .theme-variant-consulting #overview details.full-map {
+    margin-top: 18px;
+  }
+
+  .theme-variant-consulting #overview details.full-map > summary {
+    font-weight: 900;
+  }
+
   .theme-variant-consulting #overview .value {
     display: grid;
     grid-template-columns: 42px minmax(0, 1fr);
@@ -2196,6 +2265,7 @@
       <a href="#review">代码 Review</a>
       <a href="#ops">运维闭环</a>
       <a href="#future">未来计划</a>
+      <a href="#capability">能力清单</a>
     </div>
   </nav>
 
@@ -2281,7 +2351,7 @@
             <div class="stage-num">1</div>
             <h3>设计稿还原</h3>
             <p>围绕 Figma 解析、结构重组、私有组件映射和工程规范落地，把设计稿转为可复用代码。</p>
-            <div class="achieved-metric"><span>现状</span><b>UI 还原提效 50%</b></div>
+            <div class="achieved-metric"><span>现状</span><b>UI 提效 40-50%</b></div>
             <div class="stage-values"><b>重点</b><ul><li>空间化重组</li><li>组件识别</li><li>样式标准化</li></ul></div>
           </article>
           <article class="focus-card" style="--focus-accent:#14b8a6">
@@ -2289,7 +2359,7 @@
             <h3>代码生成</h3>
             <p>把需求澄清作为代码生成前置环节，通过对话收敛需求，再结合规范、蓝图和知识库生成代码。</p>
             <div class="achieved-metric"><span>现状</span><b>提效 20%-50%</b></div>
-            <div class="stage-values"><b>重点</b><ul><li>需求澄清</li><li>胶水编程</li><li>生成蓝图</li></ul></div>
+            <div class="stage-values"><b>重点</b><ul><li>需求澄清</li><li>checklist</li><li>胶水编程</li></ul></div>
           </article>
           <article class="focus-card" style="--focus-accent:#fbbf24">
             <div class="stage-num">3</div>
@@ -2313,6 +2383,47 @@
         <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M16 21a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 11v2a4 4 0 0 0 4 4h0"/><path d="M16 13v-2a4 4 0 0 0-4-4h0"/></svg></div><div><b>Code Review</b><span>20→5min / 65%</span></div></div>
         <div class="value"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M11 7v4l3 2"/></svg></div><div><b>运维闭环</b><span>32-38h/月</span></div></div>
       </div>
+      <details class="source full-map">
+        <summary>展开完整 12 步能力地图</summary>
+        <div class="phase-map" aria-label="完整 12 步 AI 提效能力地图">
+          <div class="phase-group pre" aria-labelledby="full-phase-pre">
+            <div class="phase-head">
+              <h3 id="full-phase-pre" class="phase-title">1. 开发前：需求阶段</h3>
+              <span class="phase-meta">Steps 01-02 · 已并入代码生成前置环节</span>
+            </div>
+            <div class="phase-steps">
+              <article class="stage"><div class="stage-num">1</div><h3>需求分析与澄清</h3><p>自动分析需求文档，提炼核心信息、识别风险点，完成架构拆分并生成飞书文档，再与产品和后端沟通确认。</p><div class="stage-values"><b>价值</b><ul><li>提升需求分析效率</li><li>降低理解偏差</li><li>提前暴露风险</li><li>统一协同口径</li></ul></div></article>
+              <article class="stage"><div class="stage-num">2</div><h3>自主判断可 AI 化</h3><p>判断任务是否可由 AI 自动完成，并生成执行方案。</p><div class="stage-values"><b>价值</b><ul><li>减少决策时间</li><li>提升任务拆解效率</li><li>降低人工投入</li></ul></div></article>
+            </div>
+          </div>
+          <div class="phase-group dev" aria-labelledby="full-phase-dev">
+            <div class="phase-head">
+              <h3 id="full-phase-dev" class="phase-title">2. 开发中：研发阶段</h3>
+              <span class="phase-meta">Steps 03-07 · 当前重点 + 后续计划</span>
+            </div>
+            <div class="phase-steps">
+              <article class="stage"><div class="stage-num">3</div><h3>设计稿还原</h3><p>解析设计稿，生成工程化、可复用的前端代码。</p><div class="achieved-metric"><span>现状</span><b>提效 40%-50%</b></div><div class="stage-values"><b>价值</b><ul><li>提升还原效率</li><li>降低重复开发</li><li>提高还原质量</li></ul></div></article>
+              <article class="stage"><div class="stage-num">4</div><h3>代码生成</h3><p>基于需求、规范、checklist 和蓝图生成可维护代码。</p><div class="achieved-metric"><span>现状</span><b>提效 20%-50%</b></div><div class="stage-values"><b>价值</b><ul><li>生成更准确的代码</li><li>符合工程规范</li><li>提高开发效率</li></ul></div></article>
+              <article class="stage"><div class="stage-num">5</div><h3>联调自测</h3><p>当前已用于生成测试用例辅助自测，后续探索日志分析、问题定位和异常归因。</p><div class="stage-values"><b>价值</b><ul><li>提升自测覆盖率</li><li>减少沟通成本</li><li>缩短定位时间</li></ul></div></article>
+              <article class="stage"><div class="stage-num">6</div><h3>Code Review</h3><p>智能分析代码风险与影响，辅助 Review 决策。</p><div class="achieved-metric"><b>20→5min / 65%</b></div><div class="stage-values"><b>价值</b><ul><li>提前发现风险</li><li>降低线上事故率</li><li>提升代码质量</li></ul></div></article>
+              <article class="stage"><div class="stage-num">7</div><h3>测试</h3><p>正在探索自动化测试方向，重点验证 AI 在用例生成、回归辅助和执行分析中的价值。</p><div class="stage-values"><b>价值</b><ul><li>降低人工回归成本</li><li>减少漏测风险</li><li>提升测试效率</li></ul></div></article>
+            </div>
+          </div>
+          <div class="phase-group ops" aria-labelledby="full-phase-ops">
+            <div class="phase-head">
+              <h3 id="full-phase-ops" class="phase-title">3. 开发后：运维阶段</h3>
+              <span class="phase-meta">Steps 08-12 · 闭环能力与未来探索</span>
+            </div>
+            <div class="phase-steps">
+              <article class="stage"><div class="stage-num">8</div><h3>知识库沉淀</h3><p>沉淀文档与经验，构建团队知识资产。</p><div class="stage-values"><b>价值</b><ul><li>提升复用效率</li><li>沉淀团队经验</li><li>加速新人成长</li></ul></div></article>
+              <article class="stage"><div class="stage-num">9</div><h3>自动巡检</h3><p>基于发布与风险分析，自动巡检关键页面。</p><div class="stage-values"><b>价值</b><ul><li>替代人工回归</li><li>快速发现问题</li><li>降低遗漏概率</li></ul></div></article>
+              <article class="stage"><div class="stage-num">10</div><h3>智能监控</h3><p>智能监控异常、关联分析并快速发现问题。</p><div class="stage-values"><b>价值</b><ul><li>更快发现异常</li><li>减少排查时间</li><li>提升运维效率</li></ul></div></article>
+              <article class="stage"><div class="stage-num">11</div><h3>问题分析</h3><p>结合日志与链路分析，定位根因并提供修复建议。</p><div class="stage-values"><b>价值</b><ul><li>缩短定位时间</li><li>提升根因判断</li><li>降低故障影响</li></ul></div></article>
+              <article class="stage"><div class="stage-num">12</div><h3>自主修复</h3><p>未来探索自动执行修复方案、回滚或降低故障影响。</p><div class="stage-values"><b>价值</b><ul><li>减少人工干预</li><li>提升恢复速度</li><li>降低业务损失</li></ul></div></article>
+            </div>
+          </div>
+        </div>
+      </details>
       <details class="source">
         <summary>查看原始 PDF 图片来源：全景图</summary>
         <img src="assets/page-01-image-01-X78.png" alt="AI 提效在前端研发全流程中的探索全景图原始截图">
@@ -2409,9 +2520,9 @@
       <div class="section-head">
         <div>
           <div class="kicker">02 / Design To Code</div>
-          <h2>AI 辅助设计稿还原与代码生成</h2>
+          <h2>AI 辅助设计稿还原：从设计到工程代码</h2>
         </div>
-        <p class="section-copy">通用 Figma 转代码常常“能运行，但无法真正进入业务工程体系”。这里的关键是空间化重组、私有组件识别、工程规范落地与持续优化。<br><span class="achieved-metric"><span>现状</span><b>UI 还原提效 50%</b></span></p>
+        <p class="section-copy">通用 Figma 转代码常常“能运行，但无法真正进入业务工程体系”。这里的关键是空间化重组、私有组件识别、工程规范落地与持续优化。<br><span class="achieved-metric"><span>现状</span><b>UI 提效 40-50%</b></span></p>
       </div>
       <div class="flow" aria-label="AI 辅助设计稿还原流程">
         <article class="flow-card"><span class="tag">01</span><h3>输入设计稿</h3><p>批量读取 Figma 节点、页面信息、样式信息和资源信息。</p></article>
@@ -2426,18 +2537,39 @@
           <h3>关键设计</h3>
           <ul class="mini-list">
             <li>空间化重组：解决设计稿父子关系不明确的问题。</li>
-            <li>架构分析：组件拆分、多 agent 并行生成，再拼接整体代码。</li>
+            <li>组件拆分与并行生成：识别可复用片段，分段生成后再拼接整体代码。</li>
             <li>数据收集：通过代码保留量评估 D2C 效果，支撑持续优化。</li>
           </ul>
         </article>
         <article class="card accent-blue">
           <h3>带来的价值</h3>
           <ul class="mini-list">
-            <li>无需增加ui工作量。</li>
+            <li>无需增加 UI 工作量。</li>
             <li>提升还原效率，减少手动还原时间。</li>
             <li>提高还原质量，降低后续样式修复成本。</li>
             <li>提升组件复用，降低开发成本并缩短交付周期。</li>
           </ul>
+        </article>
+      </div>
+      <div class="map-label">
+        <b>D2C 真实案例</b>
+        <span>同一页面从 Figma 设计稿到生成结果，再到组件化代码拆分</span>
+      </div>
+      <div class="grid-3">
+        <article class="card accent-violet showcase-card">
+          <h3>生成后的页面效果</h3>
+          <p>AI 生成后的页面结果，已经具备可交付的页面结构与主视觉还原。</p>
+          <img class="showcase-image" src="./1111.png" alt="D2C 生成后的房屋巡检页面效果图">
+        </article>
+        <article class="card accent-blue showcase-card">
+          <h3>Figma 设计稿截图</h3>
+          <p>原始设计稿作为 D2C 输入，提供页面布局、视觉样式和组件关系的参考基线。</p>
+          <img class="showcase-image" src="./2222.png" alt="房屋巡检页面 Figma 设计稿截图">
+        </article>
+        <article class="card accent-green showcase-card">
+          <h3>组件化代码拆分</h3>
+          <p>生成后的代码进一步进入工程化拆分，形成页面入口与多个业务组件的组合结构。</p>
+          <img class="showcase-image" src="./3333.png" alt="房屋巡检页面组件化代码截图">
         </article>
       </div>
       <details class="source">
@@ -2452,16 +2584,16 @@
           <div class="kicker">03 / Coding Strategy</div>
           <h2>代码生成：解决写不对、写不好、写不了</h2>
         </div>
-        <p class="section-copy">代码生成不是把需求丢给 AI 就结束，而是先把需求澄清前置，再用拆分、胶水编程、蓝图和知识库共同约束它，让结果真正可落地。<br><span class="achieved-metric"><span>现状</span><b>代码生成提效 20%-50%</b></span></p>
+        <p class="section-copy">代码生成不是把需求丢给 AI 就结束，而是先完成需求预解析、规范化 PRD、对话澄清和 checklist 确认，再用胶水编程、蓝图和知识库共同约束它，让结果真正可落地。<br><span class="achieved-metric"><span>现状</span><b>代码生成提效 20%-50%</b></span></p>
       </div>
       <div class="quote">结构调整：开发前的需求分析、持续澄清和规范化沉淀不再作为独立主线，而是并入代码生成的前置环节，用来解决“写不对”的问题。</div>
       <div class="flow" aria-label="AI 辅助代码生成整体方案流程">
         <article class="flow-card"><span class="tag">Parse</span><h3>需求预解析</h3><p>自动读取需求文档，提炼核心需求、功能模块、字段口径和风险点。</p></article>
-        <article class="flow-card"><span class="tag">PRD</span><h3>规范化 PRD</h3><p>生成符合开发理解的结构化 PRD，包含目标、范围、流程、边界和待确认项。</p></article>
+        <article class="flow-card"><span class="tag">PRD</span><h3>规范化 PRD 与拆分</h3><p>生成符合开发理解的结构化 PRD，同步完成模块、组件、数据流和边界拆分。</p></article>
         <article class="flow-card"><span class="tag">Clarify</span><h3>对话澄清</h3><p>围绕待确认项一问一答，收敛业务规则、状态流转和异常场景。</p></article>
-        <article class="flow-card"><span class="tag">Split</span><h3>架构拆分</h3><p>拆分模块、组件和数据流，降低单次生成复杂度。</p></article>
+        <article class="flow-card"><span class="tag">Doc</span><h3>生成 checklist</h3><p>把澄清结论整理成 checklist，先用于人工确认，再作为后续自动化测试输入。</p></article>
         <article class="flow-card"><span class="tag">Glue</span><h3>胶水编程策略</h3><p>优先复用已有模块，用最少胶水代码组合、封装和适配。</p></article>
-        <article class="flow-card"><span class="tag">Code</span><h3>生成代码</h3><p>基于澄清后的需求和架构生成工程代码。</p></article>
+        <article class="flow-card"><span class="tag">Code</span><h3>生成代码</h3><p>基于澄清后的需求、拆分结果和 checklist 生成工程代码。</p></article>
         <article class="flow-card"><span class="tag">Map</span><h3>生成蓝图</h3><p>生成架构图、数据流、字段溯源，校验 AI 理解是否符合预期。</p></article>
       </div>
       <div class="problem-grid">
@@ -2476,9 +2608,9 @@
           </ul>
           <div class="solution-row">
             <div class="solution">需求预解析</div>
-            <div class="solution">规范化 PRD</div>
+            <div class="solution">PRD 与拆分</div>
             <div class="solution">对话澄清</div>
-            <div class="solution">架构拆分</div>
+            <div class="solution">checklist</div>
           </div>
         </article>
         <article class="problem">
@@ -2528,7 +2660,7 @@
         </div>
         <div class="blueprint-explain">
           <b>生成蓝图的作用</b>
-          <p>开发完成后，把代码实现反向整理成可检查的细节视图，例如字段从哪里来、Action 如何流转，帮助开发者确认实现是否符合预期。</p>
+          <p>开发完成后，把代码实现反向整理成可检查的细节视图，例如字段从哪里来、Action 如何流转，帮助开发者确认实现是否符合预期，并为后续排查和复用提供依据。</p>
           <div class="blueprint-diagram" aria-label="生成蓝图示意图">
             <div class="blue-node">代码实现</div>
             <div class="blue-arrow">→</div>
@@ -2541,6 +2673,76 @@
             <div class="blue-check">确认实现<br>符合预期</div>
           </div>
         </div>
+      </div>
+      <div class="map-label">
+        <b>需求分类与分流策略</b>
+        <span>不同复杂度需求，进入不同的人机协同流程</span>
+      </div>
+      <div class="grid-2">
+        <article class="card accent-blue">
+          <h3>微型需求</h3>
+          <p>结构简单、改动范围小、上下文明确，适合直接让 AI 执行。</p>
+          <div class="demand-path">
+            <span class="demand-step">AI 直出代码</span>
+            <span class="demand-step">人工检查</span>
+          </div>
+          <div class="showcase-note">未来目标是让 AI 先扫描需求文档，再直接出代码，人只做结果校验。</div>
+        </article>
+        <article class="card accent-green">
+          <h3>小型需求</h3>
+          <p>不需要专门做需求澄清，由开发或产品给出简要描述后即可进入生成流程。</p>
+          <div class="demand-path">
+            <span class="demand-step">人工简单描述</span>
+            <span class="demand-step">生成代码</span>
+          </div>
+          <div class="showcase-note">这类需求的重点是减少写代码的时间，而不是增加额外流程。</div>
+        </article>
+        <article class="card accent-violet">
+          <h3>中型需求</h3>
+          <p>存在一定业务规则和状态变化，需要先做需求澄清，再进入生成代码。</p>
+          <div class="demand-path">
+            <span class="demand-step">需求澄清</span>
+            <span class="demand-step">生成代码</span>
+          </div>
+          <div class="showcase-note">这是当前代码生成最稳定、最适合规模化落地的一类场景。</div>
+        </article>
+        <article class="card accent-orange">
+          <h3>大型需求</h3>
+          <p>复杂逻辑、复杂交互并存，且产品侧对需求内容梳理不全，容易在开发中不断补细节并引发返工。</p>
+          <div class="demand-path">
+            <span class="demand-step">需求澄清</span>
+            <span class="demand-step">生成代码</span>
+            <span class="demand-step">需求变化 / 细节补全</span>
+            <span class="demand-step">生成代码</span>
+            <span class="demand-step">需求变化 / 细节补全</span>
+            <span class="demand-step">生成代码</span>
+          </div>
+          <div class="demand-tip">大型需求目前仍需继续探索与产品协同。现阶段做法是提供机器人给产品，方便他们及时补充和更新文档，降低因为需求信息不全带来的返工。</div>
+        </article>
+      </div>
+      <div class="map-label">
+        <b>代码生成真实案例</b>
+        <span>真实需求预分析与 checklist 产物，作为代码生成前的确认输入</span>
+      </div>
+      <div class="grid-3">
+        <article class="card accent-blue showcase-card">
+          <h3>需求预分析真实案例</h3>
+          <p>在正式生成代码前，先把需求页面结构、状态和关键动作拆出来，作为理解与确认的输入。</p>
+          <img class="showcase-image" src="./4444.png" alt="需求预分析真实案例图">
+          <div class="showcase-note">这类产物把“需求理解”前置显性化，帮助开发、产品和测试先对页面结构与关键动作达成一致。</div>
+        </article>
+        <article class="card accent-violet showcase-card">
+          <h3>Checklist 真实案例</h3>
+          <p>把澄清后的关键点收敛成 checklist，用于人工确认，也作为后续自动化测试和生成代码的约束输入。</p>
+          <img class="showcase-image" src="./5555.png" alt="checklist 真实案例图">
+          <div class="showcase-note">checklist 让可确认事项、边界条件和关键节点都能被复核，而不是只停留在口头沟通里。</div>
+        </article>
+        <article class="card accent-green showcase-card">
+          <h3>知识库真实案例</h3>
+          <p>把项目中的公共方法、场景入口和复用索引整理成结构化 knowledge，作为代码生成与问题定位的长期上下文。</p>
+          <img class="showcase-image" src="./6666.png" alt="知识库真实案例图">
+          <div class="showcase-note">知识库让公共能力、常用入口和生成建议可检索、可复用，也让后续 AI 生成和排查建立在真实工程事实上。</div>
+        </article>
       </div>
       <details class="source">
         <summary>查看原始 PDF 图片来源：AI 辅助代码生成整体解决方案</summary>
@@ -2671,7 +2873,7 @@
       <div class="section-head">
         <div>
           <div class="kicker">05 / After Release</div>
-          <h2>开发后：AI 助力线上运营、巡检与知识沉淀</h2>
+          <h2>AI 助力线上运营、巡检与知识沉淀</h2>
         </div>
         <p class="section-copy">发布之后研发工作并没有结束。线上阶段更关注报障闭环、问题定位、自动巡检、经验沉淀与长期可维护性。飞书 OpenClaw 方案里的测算主要可以支撑这一阶段。</p>
       </div>
@@ -2685,7 +2887,6 @@
         <article class="loop-step"><b>知识库沉淀</b><span>沉淀新路由、新工具、新组件、新业务能力和历史问题案例。</span></article>
         <article class="loop-step"><b>自动巡检</b><span>结合发布时间与 CR 风险分析结果，自动触发线上巡检。</span></article>
         <article class="loop-step"><b>线上监控与问题分析</b><span>整合告警、用户反馈、页面异常、日志与调用链路，辅助定位根因。</span></article>
-        <article class="loop-step"><b>自主修复</b><span>未来逐步完成配置降级、风险功能下线、异常状态恢复和修复方案生成。</span></article>
         <article class="loop-step"><b>沉淀与反馈</b><span>分析结果自动沉淀，反馈知识库、风险模式和 AI 能力。</span></article>
       </div>
       <div class="grid-2" style="margin-top:18px">
@@ -2728,6 +2929,7 @@
         <div class="check"><b>联调自测能力扩展</b><span>在当前生成自测用例的基础上，后续探索接口异常分析、日志聚合、问题归因和协同结论沉淀。</span></div>
         <div class="check"><b>自动化测试落地</b><span>从用例生成扩展到自动化脚本、回归范围识别、执行结果分析和测试报告沉淀，验证稳定后进入正式流程。</span></div>
         <div class="check"><b>线上问题定位指标化</b><span>提升线上问题定位的使用率和准确率，重点跟踪 AI 解决问题占比、相似问题定位耗时、FAQ / 案例沉淀率和复盘覆盖率。</span></div>
+        <div class="check"><b>自主修复探索</b><span>在问题定位足够稳定后，再逐步探索配置降级、风险功能下线、异常状态恢复和修复方案生成。</span></div>
       </div>
     </section>
 
@@ -2744,6 +2946,60 @@
         <div class="timeline-item"><div class="dot">2</div><div class="timeline-body"><h3>从“AI 生成代码”到“AI 理解工程体系”</h3><p>通过规范、知识库、蓝图、组件映射与反馈闭环，让生成结果真正进入业务工程。</p></div></div>
         <div class="timeline-item"><div class="dot">3</div><div class="timeline-body"><h3>从“局部提效”到“流程闭环”</h3><p>数据反馈持续优化 AI 能力，形成越用越智能、越用越高效的正循环。</p></div></div>
       </div>
+    </section>
+
+    <section id="capability" class="shell reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">08 / Capability Inventory</div>
+          <h2>现有能力清单：当前已经沉淀的 MCP 与 Skill</h2>
+        </div>
+        <p class="section-copy">以下能力均来自项目 <code>/Users/qitmac001753/code/tujia/fetujia-ai-assets2/</code>。这里按资产形态拆成两个清单：一类是当前 MCP 相关包，一类是已经沉淀的 skill，方便在汇报里直接说明现有能力底座。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card accent-blue">
+          <h3>MCP 清单</h3>
+          <p>当前 `packages` 目录下已经沉淀的 4 个 MCP 相关包：</p>
+          <ul class="mini-list">
+            <li><b>image2url</b>：本地图片上传与 CDN 链接生成。</li>
+            <li><b>shared</b>：MCP 公共能力底座，承载共享配置、日志与通用工具。</li>
+            <li><b>vue-parser</b>：Vue 组件解析、结构图生成与 Blueprint 产物生成。</li>
+            <li><b>wiki-server</b>：Confluence / 飞书文档获取与知识内容接入。</li>
+          </ul>
+        </article>
+        <article class="card accent-orange">
+          <h3>Skill 清单</h3>
+          <p>当前已经沉淀的 skill：</p>
+          <ul class="mini-list">
+            <li><b>feishu-cr-review</b>：飞书 CR review</li>
+            <li><b>feishu-estimation</b>：飞书项目估时记录</li>
+            <li><b>feishu-fe-alert-analyzer</b>：飞书前端告警分析</li>
+            <li><b>feishu-room-issue-summary</b>：飞书群问题总结</li>
+            <li><b>feishu-room-problem-analyzer</b>：飞书群问题分析与定位</li>
+            <li><b>feishu-room-problem-orchestrator</b>：飞书群问题编排总控</li>
+            <li><b>feishu-room-problem-router</b>：飞书群问题分流与聚类</li>
+            <li><b>frontend-demand-executor</b>：前端需求执行</li>
+            <li><b>frontend-project-locator</b>：前端项目定位</li>
+            <li><b>lark-demand-change-parser</b>：需求变更解析</li>
+            <li><b>lark-demand-change-sync</b>：需求变更同步到飞书文档</li>
+            <li><b>meeting-room-booking</b>：会议室预约</li>
+            <li><b>pmo-demand-analyzer</b>：PMO 需求分析</li>
+            <li><b>pmo-deploy-lookup</b>：PMO 发布信息查询</li>
+            <li><b>auto-publish-beta</b>：自动化部署前端应用到测试环境</li>
+            <li><b>blueprint</b>：生成页面架构蓝图与三视图文档</li>
+            <li><b>blueprint-testcase</b>：基于蓝图自动生成结构化测试用例</li>
+            <li><b>cr-trigger</b>：自动在 CR 平台发起审查并分析结果</li>
+            <li><b>grill-me</b>：围绕方案或设计进行持续追问和压力测试</li>
+            <li><b>grill-with-docs</b>：结合现有文档与领域模型做方案追问和校准</li>
+            <li><b>knowledge-init</b>：初始化项目 knowledge 知识库</li>
+            <li><b>knowledge-update</b>：根据代码变更增量同步 knowledge 知识库</li>
+            <li><b>publish-feishu-doc</b>：将结论或聊天记录发布到飞书文档</li>
+            <li><b>web-rules</b>：统一前端代码规范与生成约束入口</li>
+            <li><b>wecom-room-problem-analyzer 2</b>：企微群问题分析、定位与修复辅助</li>
+          </ul>
+        </article>
+      </div>
+      <div class="quote">当前能力已经不是零散试点，而是逐步形成以 MCP 为底座、以 skill 为工作流封装的资产体系。</div>
     </section>
   </main>
 
